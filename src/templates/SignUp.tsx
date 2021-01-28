@@ -1,0 +1,66 @@
+import React, { FC, useState, useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+import { push } from 'connected-react-router'
+import { signUp } from '../reducks/users/operations'
+import { TextInput, SaveButton } from '../components/UI'
+import { Link } from '@material-ui/core'
+import { Person, Mail, Lock } from '@material-ui/icons'
+
+const SignUp: FC = () => {
+    const dispatch = useDispatch()
+    
+    const [username, setUsername] = useState<string>(""),
+          [email, setEmail] = useState<string>(""),
+          [password, setPassword] = useState<string>(""),
+          [confirmPassword, setConfirmPassword] = useState<string>("")
+
+    const inputUsername = useCallback((e) => {
+        setUsername(e.target.value)
+    }, [setUsername])
+    const inputEmail = useCallback((e) => {
+        setEmail(e.target.value)
+    }, [setEmail])
+    const inputPassword = useCallback((e) => {
+        setPassword(e.target.value)
+    }, [setPassword])
+    const inputConfirmPassword = useCallback((e) => {
+        setConfirmPassword(e.target.value)
+    }, [setConfirmPassword])
+
+    return (
+        <div className="auth-wrapin">
+            <div className="auth-container">
+                <h2 className="text-headline">ユーザー登録</h2>
+                <TextInput
+                    margin={"10px"} width={"100%"} label={"ユーザー名"} multiline={false}
+                    required={true} rows={1} value={username} type={"text"} variant={"standard"}
+                    icon={<Person />} onChange={inputUsername}
+                />
+                <TextInput
+                    margin={"10px"} width={"100%"} label={"メールアドレス"} multiline={false}
+                    required={true} rows={1} value={email} type={"email"} variant={"standard"}
+                    icon={<Mail />} onChange={inputEmail}
+                />
+                <TextInput
+                    margin={"10px"} width={"100%"} label={"パスワード"} multiline={false}
+                    required={true} rows={1} value={password} type={"password"} variant={"standard"}
+                    icon={<Lock />} onChange={inputPassword}
+                />
+                <TextInput
+                    margin={"10px 10px 0"} width={"100%"} label={"パスワード(確認用)"} multiline={false}
+                    required={true} rows={1} value={confirmPassword} type={"password"} variant={"standard"}
+                    icon={<Lock />} onChange={inputConfirmPassword}
+                />
+                <SaveButton
+                    startIcon={""}
+                    label={"アカウントを登録"}
+                    onClick={() => dispatch(signUp(username, email, password, confirmPassword))}
+                />
+                <br/>
+                <Link href="#" onClick={() => dispatch(push('/signin'))}>ログインに戻る</Link>
+            </div>
+        </div>
+    )
+}
+
+export default SignUp
