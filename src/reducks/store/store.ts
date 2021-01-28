@@ -3,10 +3,10 @@ import {
     combineReducers,
     applyMiddleware
 } from 'redux'
-import thunk from 'redux-thunk'
-import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { UserReducer } from '../users/reducers'
 import { ReportReducer } from '../reports/reducers'
+import thunk from 'redux-thunk'
+import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { History } from 'history'
 
 export default function createStore(history: History<unknown>) {
@@ -22,8 +22,6 @@ export default function createStore(history: History<unknown>) {
         )
     )
 }
-
-// rootStateの活用法がまだわからないため消さずに放置
 
 const rootReducer = combineReducers({
     users: UserReducer,
