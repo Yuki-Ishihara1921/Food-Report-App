@@ -1,12 +1,12 @@
 import React, { FC, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../reducks/store/store'
+import { push } from 'connected-react-router'
+import { RootState } from '../../reducks/store'
 import { deleteReport } from '../../reducks/reports/operations'
 import { Image } from '../../reducks/reports/types'
-import { push } from 'connected-react-router'
 import NoImage from '../../assets/img/no_image.png'
 import { makeStyles, Card, CardContent, CardMedia, Typography, Menu, MenuItem, IconButton } from '@material-ui/core'
-import Rating from '@material-ui/lab/Rating'
+import { Rating } from '@material-ui/lab'
 import { MoreVert, Edit, Delete } from '@material-ui/icons'
 
 type Props = {
@@ -18,20 +18,23 @@ type Props = {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        border: '5px solid lightsalmon',
+        border: '10px solid lightsalmon',
+        borderRadius: 20,
         [theme.breakpoints.down('sm')]: {
             width: '75%',
             margin: '20px auto'
         },
         [theme.breakpoints.up('sm')]: {
             width: 'calc(50% - 50px)',
-            margin: 20
+            margin: 15
         }
     },
     media: {
         height: '0',
         paddingTop: '70%',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        borderRadius: 10,
+        boxShadow: '0px 0px 5px 2px #555'
     },
     nameBox: {
         [theme.breakpoints.down('sm')]: {

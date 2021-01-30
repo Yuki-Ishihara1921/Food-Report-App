@@ -1,8 +1,7 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import { push } from 'connected-react-router'
-import { makeStyles, Typography } from '@material-ui/core'
-
+import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,9 +20,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const Logo: FC = () => {
-    const dispatch = useDispatch()
+const AppLogo: FC = () => {
     const classes = useStyles()
+    const dispatch = useDispatch()
+
     return (
         <span
             className={classes.root}
@@ -34,4 +34,4 @@ const Logo: FC = () => {
     )
 }
 
-export default Logo
+export default AppLogo

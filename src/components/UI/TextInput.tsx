@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { TextField, InputAdornment } from '@material-ui/core'
+import { ChangeEvent } from '../../type'
 
 type Props = {
     margin: string
@@ -12,7 +13,7 @@ type Props = {
     type: string
     variant: "standard" | "filled" | "outlined" | undefined
     icon: string | JSX.Element
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onChange: (e: ChangeEvent) => void
 }
 
 const TextInput: FC<Props> = ({margin, width, label, multiline, required, rows, value, type, variant, icon, onChange}) => {

@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchReports } from '../reducks/reports/operations'
-import { RootState } from '../reducks/store/store'
+import { RootState } from '../reducks/store'
 import { ReportCard } from '../components/reports'
 
 const ReportList: FC = () => {

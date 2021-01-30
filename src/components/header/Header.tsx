@@ -1,8 +1,7 @@
-import React, { FC, useState, useCallback, KeyboardEvent, MouseEvent } from 'react'
+import React, { FC, KeyboardEvent, MouseEvent, useState, useCallback } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../reducks/store/store'
-import AppLogo from './AppLogo'
-import SideBarDrawer from './SideBarDrawer'
+import { RootState } from '../../reducks/store'
+import { AppLogo, SideBarDrawer } from './'
 import { makeStyles, AppBar, Toolbar, IconButton } from '@material-ui/core'
 import { Menu } from '@material-ui/icons'
 
@@ -24,6 +23,7 @@ const Header: FC = () => {
     const classes = useStyles()
     const selector = useSelector((state: RootState) => state)
     const isSignedIn = selector.users.isSignedIn
+
     const [sideBarOpen, setSideBarOpen] = useState<boolean>(false)
 
     const handleDrawerToggle = useCallback((e: Event, isOpen: boolean) => {

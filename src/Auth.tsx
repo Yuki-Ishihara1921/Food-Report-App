@@ -1,6 +1,6 @@
-import React, { FC, useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from './reducks/store/store'
+import { RootState } from './reducks/store'
 import { listenAuthState } from './reducks/users/operations'
 
 const Auth: FC = ({children}) => {
@@ -18,9 +18,7 @@ const Auth: FC = ({children}) => {
         return <></>
     } else {
         return (
-            <>
-                {children}
-            </>
+            <>{children}</>
         )
     }
 }

@@ -1,15 +1,14 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { db } from '../firebase'
-import { RootState } from '../reducks/store/store'
-import { Category } from '../reducks/reports/types'
-import { TextReadOnly } from '../components/UI'
+import { RootState } from '../reducks/store'
 import { ImageSwiper } from '../components/reports'
+import { TextReadOnly } from '../components/UI'
+import { db } from '../firebase'
+import firebase from 'firebase/app'
 import 'swiper/css/swiper.css'
-import { datetimeToString } from '../function/common'
 import { makeStyles, Link } from '@material-ui/core'
-import { Update, Restaurant, Event, Train, Category as CategoryIcon } from '@material-ui/icons'
 import { Rating } from '@material-ui/lab'
+import { Update, Restaurant, Event, Train, Category } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
     itemsBox: {
@@ -21,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
             display: 'flex'
         }
     },
-    sliderBox: {
+    imageBox: {
         margin: '10px auto',
         [theme.breakpoints.down('md')]: {
             maxWidth: 500
@@ -79,6 +78,14 @@ const ReportDetail: FC = () => {
           [category, setCategory] = useState<string>(""),
           [description, setDescription] = useState<string>("")
 
+    const datetimeToString = (dt: firebase.firestore.DocumentData) => {
+        return dt.getFullYear() + '/'
+            + ('00' + (dt.getMonth()+1)).slice(-2) + '/'
+            + ('00' + dt.getDate()).slice(-2) + '  '
+            + ('00' + dt.getHours()).slice(-2) + ':'
+            + ('00' + dt.getMinutes()).slice(-2)
+    }
+
     useEffect(() => {
         if (id !== "") {
             db.collection('users').doc(uid).collection('reports').doc(id).get()
@@ -126,7 +133,7 @@ const ReportDetail: FC = () => {
                     {url && (
                         <Link href={url} target="_blank">Webサイト</Link>
                     )}
-                    <div className={classes.sliderBox}>
+                    <div className={classes.imageBox}>
                         <ImageSwiper images={images} />
                     </div>
                     <Rating
@@ -170,7 +177,7 @@ const ReportDetail: FC = () => {
                             multiline={false}
                             value={category}
                             variant={"outlined"}
-                            icon={<CategoryIcon />}
+                            icon={<Category />}
                         />
                     </div>
                 </div>

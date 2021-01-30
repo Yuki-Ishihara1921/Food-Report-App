@@ -1,9 +1,9 @@
 import { Dispatch } from "redux"
 import { push } from "connected-react-router"
-import { auth, db, FirebaseTimestamp } from "../../firebase"
 import { signInAction, signOutAction } from "./actions"
 import { UserData } from "./types"
 import { showLoadingAction, hideLoadingAction } from "../loading/action"
+import { auth, db, FirebaseTimestamp } from "../../firebase"
 
 export const signUp = (username: string, email: string, password: string, confirmPassword: string) => {
     return async (dispatch: Dispatch) => {

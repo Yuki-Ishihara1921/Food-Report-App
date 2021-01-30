@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { push } from 'connected-react-router'
 import { signIn } from '../reducks/users/operations'
 import { TextInput, SaveButton } from '../components/UI'
+import { ChangeEvent } from '../type'
 import { Link } from '@material-ui/core'
 import { Mail, Lock } from '@material-ui/icons'
 
@@ -12,11 +13,11 @@ const SignIn: FC = () => {
     const [email, setEmail] = useState<string>(""),
           [password, setPassword] = useState<string>("")
           
-    const inputEmail = useCallback((e) => {
+    const inputEmail = useCallback((e: ChangeEvent) => {
         setEmail(e.target.value)
     }, [setEmail])
-    
-    const inputPassword = useCallback((e) => {
+
+    const inputPassword = useCallback((e: ChangeEvent) => {
         setPassword(e.target.value)
     }, [setPassword])
 

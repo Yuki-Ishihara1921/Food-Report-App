@@ -4,7 +4,7 @@ import './assets/style.css'
 import App from './App'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
-import { history, store } from './reducks/store/store'
+import { history, store } from './reducks/store'
 import reportWebVitals from './reportWebVitals'
 
 ReactDOM.render(

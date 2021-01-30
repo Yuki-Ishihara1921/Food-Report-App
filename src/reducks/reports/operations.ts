@@ -1,9 +1,9 @@
 import { Dispatch } from "redux"
 import { push } from "connected-react-router"
-import { db, FirebaseTimestamp } from "../../firebase"
 import { fetchReportsAction } from "./actions"
 import { EditReport, ReportData } from "./types"
 import { showLoadingAction, hideLoadingAction } from "../loading/action"
+import { db, FirebaseTimestamp } from "../../firebase"
 
 const usersRef = db.collection('users')
 

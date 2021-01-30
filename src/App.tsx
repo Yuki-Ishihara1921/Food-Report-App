@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { FC } from 'react'
 import Router from './Router'
 import { Header } from './components/header'
 import { Loading, ScrollToTop } from './components/UI'
 
-const App = () => {
+const App: FC = () => {
   return (
     <Loading>
       <ScrollToTop />

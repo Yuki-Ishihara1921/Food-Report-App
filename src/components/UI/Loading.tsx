@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { CircularProgress } from '@material-ui/core'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../reducks/store/store'
+import { RootState } from '../../reducks/store'
+import { CircularProgress } from '@material-ui/core'
 
 const Loading: FC = ({children}) => {
     const selector = useSelector((state: RootState) => state)

@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../reducks/store/store'
+import { RootState } from '../../reducks/store'
 
 const ScrollToTop: FC = () => {
     const selector = useSelector((state: RootState) => state)

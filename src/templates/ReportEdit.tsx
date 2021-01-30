@@ -1,15 +1,16 @@
 import React, { FC, useState, useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { db } from '../firebase'
-import { RootState } from '../reducks/store/store'
+import { RootState } from '../reducks/store'
 import { saveReport } from '../reducks/reports/operations'
 import { Image, Category, EditReport } from '../reducks/reports/types'
 import { ImageArea } from '../components/reports'
 import { TextInput, SelectBox, SaveButton } from '../components/UI'
+import { ChangeEvent } from '../type'
+import { db } from '../firebase'
+import moment from 'moment'
 import { makeStyles, InputLabel } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
 import { Restaurant, Train, Language, Save } from '@material-ui/icons'
-import moment from 'moment'
 
 const useStyles = makeStyles((theme) => ({
     itemsBox: {
@@ -40,6 +41,7 @@ const ReportEdit: FC = () => {
     const dispatch = useDispatch()
     const selector = useSelector((state: RootState) => state)
     const uid = selector.users.uid
+
     const [name, setName] = useState<string>(""),
           [images, setImages] = useState<Image[]>([]),
           [rate, setRate] = useState<number | null>(0),
@@ -51,22 +53,27 @@ const ReportEdit: FC = () => {
           [description, setDescription] = useState<string>(""),
           [categories, setCategories] = useState<Category[]>([])
 
-    const inputName = useCallback((e) => {
+    const inputName = useCallback((e: ChangeEvent) => {
         setName(e.target.value)
     }, [setName])
-    const inputDate = useCallback((e) => {
+
+    const inputDate = useCallback((e: ChangeEvent) => {
         setDate(e.target.value)
     }, [setDate])
-    const inputPrice = useCallback((e) => {
-        setPrice(e.target.value)
+
+    const inputPrice = useCallback((e: ChangeEvent) => {
+        setPrice(Number(e.target.value))
     }, [setPrice])
-    const inputStation = useCallback((e) => {
+
+    const inputStation = useCallback((e: ChangeEvent) => {
         setStation(e.target.value)
     }, [setStation])
-    const inputUrl = useCallback((e) => {
+
+    const inputUrl = useCallback((e: ChangeEvent) => {
         setUrl(e.target.value)
     }, [setUrl])
-    const inputDescription = useCallback((e) => {
+
+    const inputDescription = useCallback((e: ChangeEvent) => {
         setDescription(e.target.value)
     }, [setDescription])
 
@@ -163,7 +170,7 @@ const ReportEdit: FC = () => {
                     <div className="margin-auto">
                         <SelectBox
                             label={"カテゴリー"} required={true} options={categories}
-                            setCategory={setCategory} value={category}
+                            select={setCategory} value={category}
                         />
                     </div>
                 </div>
