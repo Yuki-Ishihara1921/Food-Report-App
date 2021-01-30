@@ -1,4 +1,5 @@
 import firebase from 'firebase/app'
+import { SIGN_IN, SIGN_OUT } from './actions'
 
 export type UserState = {
     isSignedIn: boolean
@@ -14,7 +15,6 @@ export type UserData = {
 }
 
 // Actions
-import { SIGN_IN, SIGN_OUT } from './actions'
 type SignInAction = {
     type: typeof SIGN_IN
     payload: UserState

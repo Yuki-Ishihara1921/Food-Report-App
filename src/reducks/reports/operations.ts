@@ -1,48 +1,18 @@
 import { Dispatch } from "redux"
 import { push } from "connected-react-router"
 import { db, FirebaseTimestamp } from "../../firebase"
-import { deleteReportAction, fetchReportsAction } from "./actions"
-import { EditReport, ReportData, ReportState } from "./types"
+import { fetchReportsAction } from "./actions"
+import { EditReport, ReportData } from "./types"
+import { showLoadingAction, hideLoadingAction } from "../loading/action"
 
-export const saveReport = (uid: string, editReport: EditReport) => {
-    return async (dispatch: Dispatch) => {
-        const res = window.confirm("こちらの内容でよろしいですか？")
-        if (!res) {
-            return false
-        } else {
-            const reportsRef = db.collection('users').doc(uid).collection('reports')
-            const timestamp = FirebaseTimestamp.now()
-            if (editReport.id === "") {
-                const ref = reportsRef.doc()
-                editReport.id = ref.id
-            }
-            const newReport: ReportData = {
-                id: editReport.id,
-                name: editReport.name,
-                images: editReport.images,
-                rate: editReport.rate,
-                date: editReport.date,
-                price: editReport.price,
-                station: editReport.station,
-                category: editReport.category,
-                url: editReport.url,
-                description: editReport.description,
-                updated_at: timestamp,
-            }
-            return reportsRef.doc(editReport.id).set(newReport, { merge: true })
-            .then(() => {
-                dispatch(push('/'))
-            })
-            .catch((error) => {
-                throw new Error(error)
-            })
-        }
-    }
-}
+const usersRef = db.collection('users')
 
-export const fetchReports = (uid: string) => {
+export const fetchReports = (uid: string, category: string) => {
     return async (dispatch: Dispatch) => {
-        db.collection('users').doc(uid).collection('reports').orderBy('updated_at', 'desc').get()
+        dispatch(showLoadingAction("データ取得中"))
+        let query = usersRef.doc(uid).collection('reports').orderBy('updated_at', 'desc')
+        query = (category !== "") ? query.where('category', '==', category) : query
+        query.get()
         .then((snapshots) => {
             const reportsList: ReportData[] = []
             snapshots.forEach((snapshot) => {
@@ -62,7 +32,47 @@ export const fetchReports = (uid: string) => {
                 })
             })
             dispatch(fetchReportsAction(reportsList))
+            dispatch(hideLoadingAction())
         })
+    }
+}
+
+export const saveReport = (uid: string, editReport: EditReport) => {
+    return async (dispatch: Dispatch) => {
+        const res = window.confirm("こちらの内容で登録しますか？")
+        if (!res) {
+            return false
+        } else {
+            dispatch(showLoadingAction("レポート作成中..."))
+            const reportsRef = usersRef.doc(uid).collection('reports')
+            const timestamp = FirebaseTimestamp.now()
+            if (editReport.id === "") {
+                const ref = reportsRef.doc()
+                editReport.id = ref.id
+            }
+            const newReport: ReportData = {
+                id: editReport.id,
+                name: editReport.name,
+                images: editReport.images,
+                rate: editReport.rate,
+                date: editReport.date,
+                price: editReport.price,
+                station: editReport.station,
+                category: editReport.category,
+                url: editReport.url,
+                description: editReport.description,
+                updated_at: timestamp,
+            }
+            return reportsRef.doc(editReport.id).set(newReport, { merge: true })
+                .then(() => {
+                    dispatch(hideLoadingAction())
+                    dispatch(push('/'))
+                })
+                .catch((error) => {
+                    dispatch(hideLoadingAction())
+                    throw new Error(error)
+                })
+        }
     }
 }
 
@@ -72,11 +82,18 @@ export const deleteReport = (uid: string, reportId: string) => {
         if (!res) {
             return false
         } else {
-            db.collection('users').doc(uid).collection('reports').doc(reportId).delete()
+            dispatch(showLoadingAction("削除中..."))
+            usersRef.doc(uid).collection('reports').doc(reportId).delete()
             .then(() => {
-                const prevReports = getState().reports.list
-                const nextReports = prevReports.filter((report: ReportState) => report.id !== reportId)
-                dispatch(deleteReportAction(nextReports))
+                const prevReports: ReportData[] = getState().reports.list
+                const nextReports = prevReports.filter((report: ReportData) => report.id !== reportId)
+                dispatch(fetchReportsAction(nextReports))
+                dispatch(hideLoadingAction())
+            })
+            .catch((error) => {
+                dispatch(hideLoadingAction())
+                alert("削除に失敗しました。もう一度お試し下さい。")
+                throw new Error(error)
             })
         }
     }

@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
     root: {
         border: '5px solid lightsalmon',
         [theme.breakpoints.down('sm')]: {
-            width: 'calc(100% - 10px)',
-            margin: '0 10px 30px'
+            width: '75%',
+            margin: '20px auto'
         },
         [theme.breakpoints.up('sm')]: {
             width: 'calc(50% - 50px)',
@@ -33,15 +33,23 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: '70%',
         cursor: 'pointer'
     },
+    nameBox: {
+        [theme.breakpoints.down('sm')]: {
+            padding: 5
+        },
+        [theme.breakpoints.up('sm')]: {
+            padding: 10
+        }
+    },
     reportName: {
         display: '-webkit-box',
         height: 10,
         padding: 10,
-        fontSize: 18,
+        fontSize: 20,
         lineHeight: '20px',
         overflow: 'hidden',
         boxOrient: 'vertical',
-        lineClamp: 1,
+        lineClamp: 1
     }
 }))
 
@@ -71,7 +79,7 @@ const ReportCard: FC<Props> = ({id, name, images, rate}) => {
                 title="詳細"
                 onClick={() => dispatch(push('/reports/' + id))}
             />
-            <CardContent>
+            <CardContent className={classes.nameBox}>
                 <Typography className={classes.reportName} component="h1">
                     {name}
                 </Typography>

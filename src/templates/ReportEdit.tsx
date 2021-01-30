@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { db } from '../firebase'
 import { RootState } from '../reducks/store/store'
 import { saveReport } from '../reducks/reports/operations'
-import { Category, Image, EditReport } from '../reducks/reports/types'
+import { Image, Category, EditReport } from '../reducks/reports/types'
 import { ImageArea } from '../components/reports'
 import { TextInput, SelectBox, SaveButton } from '../components/UI'
 import { makeStyles, InputLabel } from '@material-ui/core'
@@ -48,21 +48,8 @@ const ReportEdit: FC = () => {
           [station, setStation] = useState<string>(""),
           [category, setCategory] = useState<string>(""),
           [url, setUrl] = useState<string>(""),
-          [description, setDescription] = useState<string>("")
-
-    const categories: Category[] = [
-        { id: "izakaya", name: "居酒屋"},
-        { id: "cafe", name: "カフェ" },
-        { id: "sushi", name: "寿司" },
-        { id: "chain", name: "チェーン" },
-        { id: "meet", name: "肉料理" },
-        { id: "fastfood", name: "ファストフード" },
-        { id: "fami-res", name: "ファミレス" },
-        { id: "ramen", name: "ラーメン" },
-        { id: "ryoutei", name: "料亭" },
-        { id: "restaurant", name: "レストラン" },
-        { id: "others", name: "その他" }
-    ]
+          [description, setDescription] = useState<string>(""),
+          [categories, setCategories] = useState<Category[]>([])
 
     const inputName = useCallback((e) => {
         setName(e.target.value)
@@ -129,6 +116,23 @@ const ReportEdit: FC = () => {
         }
     }, [id])
 
+    useEffect(() => {
+        db.collection('categories').orderBy('order', 'asc').get()
+        .then((snapshots) => {
+            const list: Category[] = []
+            snapshots.forEach((snapshot) => {
+                const data = snapshot.data()
+                if (data) {
+                    list.push({
+                        id: data.id,
+                        name: data.name
+                    })
+                }
+            })
+            setCategories(list)
+        })
+    }, [])
+
     return (
         <div className="editpage-wrapin">
             <h2 className="text-headline">食レポ作成・編集</h2>
@@ -159,7 +163,7 @@ const ReportEdit: FC = () => {
                     <div className="margin-auto">
                         <SelectBox
                             label={"カテゴリー"} required={true} options={categories}
-                            select={setCategory} value={category}
+                            setCategory={setCategory} value={category}
                         />
                     </div>
                 </div>

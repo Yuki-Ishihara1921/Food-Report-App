@@ -32,7 +32,7 @@ const ImageArea: FC<Props> = ({images, setImages}) => {
         uploadTask.then(() => {
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
                 const newImage: Image = { id: fileName, path: downloadURL }
-                setImages(((prevState: typeof images) => [...prevState, newImage]))
+                setImages(((prevState) => [...prevState, newImage]))
             })
         })
     }, [setImages])

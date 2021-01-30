@@ -7,7 +7,7 @@ type Props = {
     options: Category[]
     required: boolean
     value: string
-    select: React.Dispatch<React.SetStateAction<string>>
+    setCategory: React.Dispatch<React.SetStateAction<string>>
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -19,15 +19,14 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const SelectBox: FC<Props> = ({label, options, required, value, select}) => {
+const SelectBox: FC<Props> = ({label, options, required, value, setCategory}) => {
     const classes = useStyles()
-    
     return (
         <FormControl className={classes.formControl}>
             <InputLabel>{label}</InputLabel>
             <Select
                 value={value} required={required}
-                onChange={(e: React.ChangeEvent<{ value: unknown }>) => select(e.target.value as string)}
+                onChange={(e: React.ChangeEvent<{ value: unknown }>) => setCategory(e.target.value as string)}
             >
                 {options.map((category) => (
                     <MenuItem key={category.id} value={category.name}>{category.name}</MenuItem>

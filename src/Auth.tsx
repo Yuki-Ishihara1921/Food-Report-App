@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from './reducks/store/store'
 import { listenAuthState } from './reducks/users/operations'
 
-const Auth: FC = ({children}: any) => {
+const Auth: FC = ({children}) => {
     const dispatch = useDispatch()
     const selector = useSelector((state: RootState) => state)
     const isSignedIn = selector.users.isSignedIn
@@ -17,7 +17,11 @@ const Auth: FC = ({children}: any) => {
     if (!isSignedIn) {
         return <></>
     } else {
-        return children
+        return (
+            <>
+                {children}
+            </>
+        )
     }
 }
 

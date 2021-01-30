@@ -1,10 +1,12 @@
-import React, { FC, useState, KeyboardEvent, MouseEvent } from 'react'
+import React, { FC, useState, useCallback, KeyboardEvent, MouseEvent } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../reducks/store/store'
-import { makeStyles, AppBar, Toolbar, IconButton } from '@material-ui/core'
-import { Menu } from '@material-ui/icons'
 import AppLogo from './AppLogo'
 import SideBarDrawer from './SideBarDrawer'
+import { makeStyles, AppBar, Toolbar, IconButton } from '@material-ui/core'
+import { Menu } from '@material-ui/icons'
+
+export type Event = KeyboardEvent | MouseEvent | {}
 
 const useStyles = makeStyles({
     root: {
@@ -22,14 +24,14 @@ const Header: FC = () => {
     const classes = useStyles()
     const selector = useSelector((state: RootState) => state)
     const isSignedIn = selector.users.isSignedIn
-    const [sideBarOpen, setSideBarOpen] = useState(false)
+    const [sideBarOpen, setSideBarOpen] = useState<boolean>(false)
 
-    const handleDrawerToggle = (isOpen: boolean) => (e: KeyboardEvent | MouseEvent) => {
-        if (e.type === 'keydown' && ((e as KeyboardEvent).key === 'Tab' || (e as KeyboardEvent).key === 'Shift')) {
+    const handleDrawerToggle = useCallback((e: Event, isOpen: boolean) => {
+        if ((e as KeyboardEvent).type === 'keydown' && ((e as KeyboardEvent).key === 'Tab' || (e as KeyboardEvent).key === 'Shift')) {
             return
         }
         setSideBarOpen(isOpen)
-    }
+    }, [setSideBarOpen])
 
     return (
         <div className={classes.root}>
@@ -40,7 +42,7 @@ const Header: FC = () => {
                         <>
                             <IconButton
                                 className={classes.iconButton}
-                                onClick={handleDrawerToggle(true)}
+                                onClick={(e) => handleDrawerToggle(e, true)}
                             >
                                 <Menu />
                             </IconButton>

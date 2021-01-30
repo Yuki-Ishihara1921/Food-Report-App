@@ -2,12 +2,13 @@ import React, { FC, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { db } from '../firebase'
 import { RootState } from '../reducks/store/store'
+import { Category } from '../reducks/reports/types'
 import { TextReadOnly } from '../components/UI'
 import { ImageSwiper } from '../components/reports'
 import 'swiper/css/swiper.css'
 import { datetimeToString } from '../function/common'
 import { makeStyles, Link } from '@material-ui/core'
-import { Update, Restaurant, Event, Train, Category } from '@material-ui/icons'
+import { Update, Restaurant, Event, Train, Category as CategoryIcon } from '@material-ui/icons'
 import { Rating } from '@material-ui/lab'
 
 const useStyles = makeStyles((theme) => ({
@@ -169,7 +170,7 @@ const ReportDetail: FC = () => {
                             multiline={false}
                             value={category}
                             variant={"outlined"}
-                            icon={<Category />}
+                            icon={<CategoryIcon />}
                         />
                     </div>
                 </div>

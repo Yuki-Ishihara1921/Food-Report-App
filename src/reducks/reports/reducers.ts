@@ -1,7 +1,7 @@
 import * as Actions from './actions'
-import { ReportAction, ReportListState　} from './types'
+import { ReportAction, ReportsState　} from './types'
 
-const initialState: ReportListState = {
+const initialState: ReportsState = {
     list: []
 }
 
@@ -11,11 +11,6 @@ export const ReportReducer = (state = initialState, action: ReportAction) => {
             return {
                 ...state,
                 ...action.payload
-            }
-        case Actions.DELETE_REPORT:
-            return {
-                ...state,
-                ...action.payload.list
             }
         default:
             return state

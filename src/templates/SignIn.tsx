@@ -15,6 +15,7 @@ const SignIn: FC = () => {
     const inputEmail = useCallback((e) => {
         setEmail(e.target.value)
     }, [setEmail])
+    
     const inputPassword = useCallback((e) => {
         setPassword(e.target.value)
     }, [setPassword])
