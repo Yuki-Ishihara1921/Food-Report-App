@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchReports } from '../reducks/reports/operations'
 import { RootState } from '../reducks/store'
+import { fetchReports } from '../reducks/reports/operations'
 import { ReportCard } from '../components/reports'
 
 const ReportList: FC = () => {
@@ -18,9 +18,9 @@ const ReportList: FC = () => {
     }, [query])
 
     return (
-        <div className="reportpage-wrapin">
+        <div className="reportPage">
             <h2 className="text-headline">食レポ一覧</h2>
-            <div className="reports-flex">
+            <div className="reportPage_container">
                 {reports.length > 0 && (
                     reports.map(report => (
                         <ReportCard

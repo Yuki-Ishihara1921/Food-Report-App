@@ -11,7 +11,7 @@ const Loading: FC = ({children}) => {
     return (
         <>
             {isLoading && (
-                <section className="c-section__loading">
+                <section className="loading__container">
                     <CircularProgress />
                     <p>{loadingText}</p>
                 </section>

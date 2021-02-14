@@ -1,9 +1,9 @@
 import React, { FC, KeyboardEvent, MouseEvent, useState, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../reducks/store'
-import { AppLogo, SideBarDrawer } from './'
 import { makeStyles, AppBar, Toolbar, IconButton } from '@material-ui/core'
 import { Menu } from '@material-ui/icons'
+import { AppLogo, SideBarDrawer } from './'
 
 export type Event = KeyboardEvent | MouseEvent | {}
 

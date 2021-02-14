@@ -7,9 +7,9 @@ const useStyles = makeStyles((theme) => ({
     root: {
         margin: 0,
         padding: '2px 20px',
-        background: 'cornflowerblue',
         boxShadow: '0px 0px 0px 3px #555',
         borderRadius: '20px',
+        background: 'cornflowerblue',
         cursor: 'pointer',
         [theme.breakpoints.down('sm')]: {
             fontSize: 15

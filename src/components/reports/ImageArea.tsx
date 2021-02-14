@@ -1,9 +1,9 @@
 import React, { FC, useCallback } from 'react'
-import { storage } from '../../firebase'
 import { Image } from '../../reducks/reports/types'
-import ImagePreview from './ImagePreview'
 import { makeStyles, IconButton } from '@material-ui/core'
 import { AddPhotoAlternate } from '@material-ui/icons'
+import ImagePreview from './ImagePreview'
+import { storage } from '../../firebase'
 
 type Props = {
     images: Image[]
@@ -61,7 +61,7 @@ const ImageArea: FC<Props> = ({images, setImages}) => {
                     </label>
                 </IconButton>
             </div>
-            <div className="list-images">
+            <div className="imageList">
                 {images.length > 0 && (
                     images.map((image: Image) =>
                         <ImagePreview

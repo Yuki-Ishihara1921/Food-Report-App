@@ -2,10 +2,10 @@ import React, { FC, useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { push } from 'connected-react-router'
 import { signOut } from '../../reducks/users/operations'
-import { Event } from './Header'
-import { db } from '../../firebase'
 import { makeStyles, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider } from '@material-ui/core'
 import { ExitToApp, Launch } from '@material-ui/icons'
+import { Event } from './Header'
+import { db } from '../../firebase'
 
 type Props = {
     open: boolean

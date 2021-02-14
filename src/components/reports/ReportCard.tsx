@@ -4,10 +4,10 @@ import { push } from 'connected-react-router'
 import { RootState } from '../../reducks/store'
 import { deleteReport } from '../../reducks/reports/operations'
 import { Image } from '../../reducks/reports/types'
-import NoImage from '../../assets/img/no_image.png'
 import { makeStyles, Card, CardContent, CardMedia, Typography, Menu, MenuItem, IconButton } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
 import { MoreVert, Edit, Delete } from '@material-ui/icons'
+import NoImage from '../../assets/img/no_image.png'
 
 type Props = {
     id: string
@@ -89,39 +89,37 @@ const ReportCard: FC<Props> = ({id, name, images, rate}) => {
             </CardContent>
             <div className="display-flex">
                 <Rating
-                    name="read-rating"
+                    name="rating-readonly"
                     size={"large"}
                     style={{margin: 'auto'}}
                     readOnly
                     value={rate}
                 />
-                <div className="ml-auto">
-                    <IconButton onClick={handleOpen}>
-                        <MoreVert />
-                    </IconButton>
-                    <Menu
-                        anchorEl={anchorEl}
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
+                <IconButton onClick={handleOpen}>
+                    <MoreVert />
+                </IconButton>
+                <Menu
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                >
+                    <MenuItem
+                        onClick={() => {
+                            dispatch(push('report/edit/' + id))
+                            handleClose()
+                        }}
                     >
-                        <MenuItem
-                            onClick={() => {
-                                dispatch(push('report/edit/' + id))
-                                handleClose()
-                            }}
-                        >
-                            {<Edit />}編集する
-                        </MenuItem>
-                        <MenuItem
-                            onClick={() => {
-                                dispatch(deleteReport(uid, id))
-                                handleClose()
-                            }}
-                        >
-                            {<Delete />}削除する
-                        </MenuItem>
-                    </Menu>
-                </div>
+                        {<Edit />}編集する
+                    </MenuItem>
+                    <MenuItem
+                        onClick={() => {
+                            dispatch(deleteReport(uid, id))
+                            handleClose()
+                        }}
+                    >
+                        {<Delete />}削除する
+                    </MenuItem>
+                </Menu>
             </div>
         </Card>
     )

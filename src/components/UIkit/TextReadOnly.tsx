@@ -6,7 +6,7 @@ type Props = {
     width: string
     label: string
     multiline: boolean
-    value: unknown
+    value: string | number
     variant: "standard" | "filled" | "outlined" | undefined
     icon: string | JSX.Element
 }
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 const TextReadOnly: FC<Props> = ({width, label, multiline, value, variant, icon}) => {
     const classes = useStyles()
     const theme = useTheme()
-    const moreMdWidth = useMediaQuery(theme.breakpoints.up('sm'))
+    const moreSmWidth = useMediaQuery(theme.breakpoints.up('sm'))
     
     return (
         <TextField
@@ -28,7 +28,7 @@ const TextReadOnly: FC<Props> = ({width, label, multiline, value, variant, icon}
             style={{width: width}}
             label={label}
             multiline={multiline}
-            size={moreMdWidth ? 'medium' : 'small'}
+            size={moreSmWidth ? 'medium' : 'small'}
             value={value}
             variant={variant}
             InputProps={{

@@ -1,4 +1,4 @@
-import { HIDE_LOADING, SHOW_LOADING } from "./action"
+import { HIDE_LOADING, SHOW_LOADING } from "./actions"
 
 export type Loading = {
     state: boolean

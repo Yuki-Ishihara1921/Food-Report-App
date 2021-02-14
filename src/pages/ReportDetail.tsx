@@ -1,14 +1,13 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../reducks/store'
-import { ImageSwiper } from '../components/reports'
-import { TextReadOnly } from '../components/UI'
-import { db } from '../firebase'
-import firebase from 'firebase/app'
-import 'swiper/css/swiper.css'
 import { makeStyles, Link } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
 import { Update, Restaurant, Event, Train, Category } from '@material-ui/icons'
+import { ImageSwiper } from '../components/reports'
+import { TextReadOnly } from '../components/UIkit'
+import { db } from '../firebase'
+import firebase from 'firebase/app'
 
 const useStyles = makeStyles((theme) => ({
     itemsBox: {
@@ -63,9 +62,9 @@ const useStyles = makeStyles((theme) => ({
 
 const ReportDetail: FC = () => {
     const classes = useStyles()
-    const id = window.location.href.split('/reports/')[1]
     const selector = useSelector((state: RootState) => state.users)
     const uid = selector.uid
+    const id = window.location.href.split('/reports/')[1]
 
     const [updatedAt, setUpdatedAt] = useState<string>(""),
           [name, setName] = useState<string>(""),
@@ -87,7 +86,7 @@ const ReportDetail: FC = () => {
     }
 
     useEffect(() => {
-        if (id !== "") {
+        if (id) {
             db.collection('users').doc(uid).collection('reports').doc(id).get()
             .then((snapshot) => {
                 const data = snapshot.data()
@@ -101,15 +100,14 @@ const ReportDetail: FC = () => {
                     setStation(data.station)
                     setCategory(data.category)
                     setDescription(data.description)
-                    const updated_at = datetimeToString(data.updated_at.toDate())
-                    setUpdatedAt(updated_at)
+                    setUpdatedAt(datetimeToString(data.updated_at.toDate()))
                 }
             })
         }
-    }, [id])
+    }, [uid, id])
 
     return (
-        <div className="reportpage-wrapin">
+        <div className="reportPage">
             <div className="text-right">
                 <TextReadOnly
                     width={""}
@@ -159,7 +157,7 @@ const ReportDetail: FC = () => {
                             multiline={false}
                             value={price}
                             variant={"outlined"}
-                            icon="¥"
+                            icon={"¥"}
                         />
                     </div>
                     <div className={classes.sideFlex}>
@@ -188,7 +186,7 @@ const ReportDetail: FC = () => {
                 multiline={true}
                 value={description}
                 variant={"outlined"}
-                icon=""
+                icon={""}
             />
         </div>
     )

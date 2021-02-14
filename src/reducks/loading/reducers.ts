@@ -1,4 +1,4 @@
-import * as Actions from './action'
+import * as Actions from './actions'
 import { Loading, LoadingAction } from './type'
 
 const initialState: Loading = {

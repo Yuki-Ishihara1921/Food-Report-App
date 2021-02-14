@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Switch, Route } from 'react-router'
 import Auth from './Auth'
-import { SignIn, SignUp, ReportList, ReportDetail, ReportEdit } from './templates'
+import { SignIn, SignUp, ReportList, ReportDetail, ReportEdit } from './pages'
 
 const Router: FC = () => {
     return (

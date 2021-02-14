@@ -2,10 +2,10 @@ import React, { FC, useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { push } from 'connected-react-router'
 import { signUp } from '../reducks/users/operations'
-import { TextInput, SaveButton } from '../components/UI'
-import { ChangeEvent } from '../type'
 import { Link } from '@material-ui/core'
 import { Person, Mail, Lock } from '@material-ui/icons'
+import { TextInput, SaveButton } from '../components/UIkit'
+import { ChangeEvent } from '../type'
 
 const SignUp: FC = () => {
     const dispatch = useDispatch()
@@ -32,8 +32,8 @@ const SignUp: FC = () => {
     }, [setConfirmPassword])
 
     return (
-        <div className="auth-wrapin">
-            <div className="auth-container">
+        <div className="auth">
+            <div className="auth__container">
                 <h2 className="text-headline">ユーザー登録</h2>
                 <TextInput
                     margin={"10px"} width={"100%"} label={"ユーザー名"} multiline={false}

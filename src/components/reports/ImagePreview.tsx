@@ -8,7 +8,7 @@ type Props = {
 
 const ImagePreview: FC<Props> = ({id, path, deleteImage}) => {
     return (
-        <div className="image-container" onClick={() => deleteImage(id)}>
+        <div className="image__container" onClick={() => deleteImage(id)}>
             <img src={path} alt="レポート画像"/>
         </div>
     )

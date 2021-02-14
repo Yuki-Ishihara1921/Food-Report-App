@@ -1,16 +1,16 @@
 import React, { FC, useState, useCallback, useEffect } from 'react'
+import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../reducks/store'
 import { saveReport } from '../reducks/reports/operations'
 import { Image, Category, EditReport } from '../reducks/reports/types'
-import { ImageArea } from '../components/reports'
-import { TextInput, SelectBox, SaveButton } from '../components/UI'
-import { ChangeEvent } from '../type'
-import { db } from '../firebase'
-import moment from 'moment'
 import { makeStyles, InputLabel } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
 import { Restaurant, Train, Language, Save } from '@material-ui/icons'
+import { ImageArea } from '../components/reports'
+import { TextInput, SelectBox, SaveButton } from '../components/UIkit'
+import { ChangeEvent } from '../type'
+import { db } from '../firebase'
 
 const useStyles = makeStyles((theme) => ({
     itemsBox: {

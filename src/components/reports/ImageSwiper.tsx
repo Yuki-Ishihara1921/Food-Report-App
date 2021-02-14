@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react'
-import { Image } from '../../reducks/reports/types'
 import Swiper from 'react-id-swiper'
+import 'swiper/css/swiper.css'
+import { Image } from '../../reducks/reports/types'
 import NoImage from '../../assets/img/no_image.png'
 
 type Props = {
@@ -30,19 +31,19 @@ const ImageSwiper: FC<Props> = ({images}) => {
                     {images.length > 1 ? (
                         <Swiper {...params}>
                             {images.map((image) => (
-                                <div className="image-container" key={image.id}>
+                                <div className="image__container" key={image.id}>
                                     <img src={image.path} alt="レポート画像"/>
                                 </div>
                             ))}
                         </Swiper>
                     ) : (
-                        <div className="image-container">
+                        <div className="image__container">
                             <img src={images[0].path} alt="レポート画像"/>
                         </div>
                     )}
                 </>
             ) : (
-                <div className="image-container">
+                <div className="image__container">
                     <img src={NoImage} alt="画像なし"/>
                 </div>
             )}

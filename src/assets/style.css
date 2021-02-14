@@ -1,20 +1,10 @@
-/* page - common */
-.page-main {
-  padding: 70px 0
-}
-
-.reports-flex {
-  display: flex;
-  flex-flow: row wrap;
-  margin: 0 10px 10px 10px;
-}
-
 /* page - SignUp SignIn */
-.auth-wrapin {
+
+.auth {
   margin: 2rem;
 }
 
-.auth-container {
+.auth__container {
   max-width: 400px;
   margin: auto;
   padding: 20px;
@@ -24,13 +14,21 @@
 }
 
 /* page - Reportlist ReportDetail */
-.reportpage-wrapin {
+
+.reportPage {
   max-width: 760px;
   margin: 0 auto;
   text-align: center;
 }
 
+.reportPage_container {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 10px 10px 10px;
+}
+
 /* page - ReportEdit */
+
 .editpage-wrapin {
   max-width: 500px;
   margin: 0 auto;
@@ -41,44 +39,35 @@
   box-shadow: 0px 0px 1px 0px gray;
 }
 
-/* component - Header */
-.logo-content {
-  margin: 0;
-  padding: 2px 20px;
-  background: cornflowerblue;
-  box-shadow: 0px 0px 0px 3px #555;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
 /* component - ImageArea ImagePreview */
+
 .display-none {
   display: none;
 }
 
-.list-images {
+.imageList {
   display: flex;
   flex-flow: wrap;
 }
 
-.list-images > .image-container {
-  margin: .5rem;
+.imageList > .image__container {
   width: calc(50% - 1rem);
+  margin: .5rem;
 }
 
-.image-container {
+.image__container {
   position: relative;
   width: 100%;
   overflow: hidden;
 }
 
-.image-container::before {
+.image__container::before {
   display: block;
   content: "";
   padding-top: 70%;
 }
 
-.image-container > img {
+.image__container > img {
   position: absolute;
   top: 0;
   left: 0;
@@ -88,9 +77,9 @@
   object-position: center;
 }
 
-/* Loading style */
-.c-section__loading {
-  z-index: 9999;
+/* component - Loading */
+
+.loading__container {
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -102,9 +91,15 @@
   height: 100vh;
   background: rgba(255, 255, 255, 0.7);
   opacity: 0.9;
+  z-index: 9999;
 }
 
 /* common styles */
+
+.page-main {
+  padding: 70px 0
+}
+
 .display-flex {
   display: flex;
 }
@@ -127,4 +122,5 @@
 .text-right {
   text-align: right;
 }
+
 /* -------------------- */

@@ -2,7 +2,7 @@ import { Dispatch } from "redux"
 import { push } from "connected-react-router"
 import { signInAction, signOutAction } from "./actions"
 import { UserData } from "./types"
-import { showLoadingAction, hideLoadingAction } from "../loading/action"
+import { showLoadingAction, hideLoadingAction } from "../loading/actions"
 import { auth, db, FirebaseTimestamp } from "../../firebase"
 
 export const signUp = (username: string, email: string, password: string, confirmPassword: string) => {
@@ -109,18 +109,23 @@ export const signIn = (email: string, password: string) => {
 
 export const signOut = () => {
     return async (dispatch: Dispatch) => {
-        dispatch(showLoadingAction("ログアウト中..."))
-        auth.signOut()
-        .then(() => {
-            dispatch(signOutAction())
-            dispatch(hideLoadingAction())
-            dispatch(push('/signin'))
-        })
-        .catch((error) => {
-            dispatch(hideLoadingAction())
-            alert("ログアウトに失敗しました。")
-            throw new Error(error)
-        })
+        const res = window.confirm("ログアウトしますか？")
+        if (!res) {
+            return false
+        } else {
+            dispatch(showLoadingAction("ログアウト中..."))
+            auth.signOut()
+            .then(() => {
+                dispatch(signOutAction())
+                dispatch(hideLoadingAction())
+                dispatch(push('/signin'))
+            })
+            .catch((error) => {
+                dispatch(hideLoadingAction())
+                alert("ログアウトに失敗しました。")
+                throw new Error(error)
+            })
+        }
     }
 }
 
