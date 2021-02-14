@@ -4,20 +4,20 @@ import { push } from 'connected-react-router'
 import { signOut } from '../../reducks/users/operations'
 import { makeStyles, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider } from '@material-ui/core'
 import { ExitToApp, Launch } from '@material-ui/icons'
-import { Event } from './Header'
+import { ClickEvent } from '../../types'
 import { db } from '../../firebase'
 
 type Props = {
     open: boolean
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-    onClose: (event: Event, isOpen: boolean) => void
+    onClose: (event: ClickEvent, isOpen: boolean) => void
 }
 
 type Filter = {
     id: string
     label: string
     path: string
-    func: (event: Event, path: string) => void
+    func: (event: ClickEvent, path: string) => void
 }
 
 const useStyles = makeStyles({
@@ -30,7 +30,7 @@ const SideBarDrawer: FC<Props> = ({open, setIsOpen, onClose}) => {
     const classes = useStyles()
     const dispatch = useDispatch()
 
-    const selectMenu = (event: Event, path: string) => {
+    const selectMenu = (event: ClickEvent, path: string) => {
         dispatch(push(path))
         onClose(event, false)
     }

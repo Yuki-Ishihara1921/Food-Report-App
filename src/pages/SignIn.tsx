@@ -5,7 +5,7 @@ import { signIn } from '../reducks/users/operations'
 import { Link } from '@material-ui/core'
 import { Mail, Lock } from '@material-ui/icons'
 import { TextInput, SaveButton } from '../components/UIkit'
-import { ChangeEvent } from '../type'
+import { ChangeEvent } from '../types'
 
 const SignIn: FC = () => {
     const dispatch = useDispatch()

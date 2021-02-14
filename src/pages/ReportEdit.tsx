@@ -9,7 +9,7 @@ import { Rating } from '@material-ui/lab'
 import { Restaurant, Train, Language, Save } from '@material-ui/icons'
 import { ImageArea } from '../components/reports'
 import { TextInput, SelectBox, SaveButton } from '../components/UIkit'
-import { ChangeEvent } from '../type'
+import { ChangeEvent } from '../types'
 import { db } from '../firebase'
 
 const useStyles = makeStyles((theme) => ({

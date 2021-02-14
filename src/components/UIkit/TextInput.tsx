@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { TextField, InputAdornment } from '@material-ui/core'
-import { ChangeEvent } from '../../type'
+import { ChangeEvent } from '../../types'
 
 type Props = {
     margin: string

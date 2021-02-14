@@ -1,11 +1,10 @@
-import React, { FC, KeyboardEvent, MouseEvent, useState, useCallback } from 'react'
+import React, { FC, useState, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../reducks/store'
 import { makeStyles, AppBar, Toolbar, IconButton } from '@material-ui/core'
 import { Menu } from '@material-ui/icons'
 import { AppLogo, SideBarDrawer } from './'
-
-export type Event = KeyboardEvent | MouseEvent | {}
+import { ClickEvent } from '../../types'
 
 const useStyles = makeStyles({
     root: {
@@ -26,7 +25,7 @@ const Header: FC = () => {
 
     const [sideBarOpen, setSideBarOpen] = useState<boolean>(false)
 
-    const handleDrawerToggle = useCallback((e: Event, isOpen: boolean) => {
+    const handleDrawerToggle = useCallback((e: ClickEvent, isOpen: boolean) => {
         if ((e as KeyboardEvent).type === 'keydown' && ((e as KeyboardEvent).key === 'Tab' || (e as KeyboardEvent).key === 'Shift')) {
             return
         }
