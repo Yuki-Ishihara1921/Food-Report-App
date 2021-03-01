@@ -141,7 +141,7 @@ const ReportEdit: FC = () => {
     }, [])
 
     return (
-        <div className="editpage-wrapin">
+        <div className="editpage">
             <h2 className="text-headline">食レポ作成・編集</h2>
             <TextInput
                 margin={""} width={"100%"} label={"店名・料理名等"} multiline={false}
