@@ -151,7 +151,7 @@ const ReportEdit: FC = () => {
             <div className={classes.itemsBox}>
                 <div className={classes.itemsFlex}>
                     <TextInput
-                        margin={""} width={"170px"} label={"日付"} multiline={false}
+                        margin={""} width={"170px"} label={"行った日"} multiline={false}
                         required={false} rows={1} value={date} type={"date"} variant={"standard"}
                         icon={""} onChange={inputDate}
                     />

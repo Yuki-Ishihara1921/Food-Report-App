@@ -120,7 +120,7 @@ const ReportDetail: FC = () => {
             </div>
             <TextReadOnly
                 width={"100%"}
-                label={""}
+                label={"店名 / 料理名"}
                 multiline={true}
                 value={name}
                 variant={"outlined"}
@@ -145,7 +145,7 @@ const ReportDetail: FC = () => {
                     <div className="display-flex">
                         <TextReadOnly
                             width={"100%"}
-                            label={"日付"}
+                            label={"行った日"}
                             multiline={false}
                             value={date}
                             variant={"outlined"}
