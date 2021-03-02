@@ -29,11 +29,16 @@ const ImageArea: FC<Props> = ({images, setImages}) => {
         const fileName = Array.from(crypto.getRandomValues(new Uint32Array(N))).map((n) => S[n % S.length]).join('')
         const uploadRef = storage.ref('images').child(fileName)
         const uploadTask = uploadRef.put(blob)
-        uploadTask.then(() => {
+        uploadTask
+        .then(() => {
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
                 const newImage: Image = { id: fileName, path: downloadURL }
                 setImages(((prevState) => [...prevState, newImage]))
             })
+        })
+        .catch(() => {
+            alert("画像が登録できませんでした。通信環境をご確認の上、再登録して下さい。")
+            return false
         })
     }, [setImages])
 
