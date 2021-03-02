@@ -1,28 +1,30 @@
-import React, { FC, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { FC } from 'react'
+import { useDispatch } from 'react-redux'
 import { push } from 'connected-react-router'
-import { RootState } from '../../reducks/store'
-import { deleteReport } from '../../reducks/reports/operations'
 import { Image } from '../../reducks/reports/types'
-import { makeStyles, Card, CardContent, CardMedia, Typography, Menu, MenuItem, IconButton } from '@material-ui/core'
+import { makeStyles, Card, CardContent, CardMedia, Typography, Divider } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
-import { MoreVert, Edit, Delete } from '@material-ui/icons'
+import { Room } from '@material-ui/icons'
 import NoImage from '../../assets/img/no_image.png'
 
 type Props = {
     id: string
     name: string
     images: Image[]
+    place: string
     rate: number | null
 }
 
 const useStyles = makeStyles((theme) => ({
     root: {
         border: '10px solid lightsalmon',
+        boxShadow: '0px 2px 5px 0px',
         borderRadius: 20,
+        background: 'floralwhite',
+        cursor: 'pointer',
         [theme.breakpoints.down('sm')]: {
             width: '75%',
-            margin: '20px auto'
+            margin: '1rem auto'
         },
         [theme.breakpoints.up('sm')]: {
             width: 'calc(50% - 50px)',
@@ -31,12 +33,11 @@ const useStyles = makeStyles((theme) => ({
     },
     media: {
         height: '0',
-        paddingTop: '70%',
-        cursor: 'pointer',
-        borderRadius: 10,
-        boxShadow: '0px 0px 5px 2px #555'
+        paddingTop: '70%'
     },
-    nameBox: {
+    content: {
+        display: 'flex',
+        justifyContent: 'center',
         [theme.breakpoints.down('sm')]: {
             padding: 5
         },
@@ -46,81 +47,52 @@ const useStyles = makeStyles((theme) => ({
     },
     reportName: {
         display: '-webkit-box',
-        height: 10,
+        width: '100%',
         padding: 10,
+        textAlign: 'center',
         fontSize: 20,
+        fontWeight: 'bold',
         lineHeight: '20px',
         overflow: 'hidden',
         boxOrient: 'vertical',
         lineClamp: 1
+    },
+    icon: {
+        color: 'green'
     }
 }))
 
-const ReportCard: FC<Props> = ({id, name, images, rate}) => {
+const ReportCard: FC<Props> = ({id, name, images, place, rate}) => {
     const classes = useStyles()
     const dispatch = useDispatch()
-    const selector = useSelector((state: RootState) => state)
-    const uid = selector.users.uid
-    const cardImages = (images.length > 0) ? images[0].path : NoImage
-
-    const [anchorEl, setAnchorEl] = useState(null)
-
-    const handleOpen = (e: any) => {
-        setAnchorEl(e.currentTarget)
-    }
-
-    const handleClose = () => {
-        setAnchorEl(null)
-    }
-    
+    const cardImages = (images.length > 0) ? images[0].path : NoImage    
 
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} onClick={() => dispatch(push('/reports/' + id))}>
+            <CardContent className={classes.content}>
+                <Typography className={classes.reportName} variant="h1" color="primary">
+                    {name}
+                </Typography>
+            </CardContent>
             <CardMedia
                 className={classes.media}
                 image={cardImages}
                 title="詳細"
-                onClick={() => dispatch(push('/reports/' + id))}
             />
-            <CardContent className={classes.nameBox}>
-                <Typography className={classes.reportName} component="h1">
-                    {name}
+            <CardContent className={classes.content}>
+                <Room className={classes.icon} />
+                <Typography component="h6">
+                    {place}
                 </Typography>
             </CardContent>
-            <div className="display-flex">
-                <Rating
-                    name="rating-readonly"
-                    size={"large"}
-                    style={{margin: 'auto'}}
-                    readOnly
-                    value={rate}
-                />
-                <IconButton onClick={handleOpen}>
-                    <MoreVert />
-                </IconButton>
-                <Menu
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                >
-                    <MenuItem
-                        onClick={() => {
-                            dispatch(push('report/edit/' + id))
-                            handleClose()
-                        }}
-                    >
-                        {<Edit />}編集する
-                    </MenuItem>
-                    <MenuItem
-                        onClick={() => {
-                            dispatch(deleteReport(uid, id, images))
-                            handleClose()
-                        }}
-                    >
-                        {<Delete />}削除する
-                    </MenuItem>
-                </Menu>
-            </div>
+            <Divider />
+            <Rating
+                name="rating-readonly"
+                size={"large"}
+                style={{margin: 'auto'}}
+                readOnly
+                value={rate}
+            />
         </Card>
     )
 }

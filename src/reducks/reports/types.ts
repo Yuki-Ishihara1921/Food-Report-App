@@ -19,7 +19,7 @@ export type ReportData = {
     rate: number | null
     date: string
     price: number
-    station: string
+    place: string
     category: string
     description: string
     updated_at: firebase.firestore.Timestamp
@@ -36,7 +36,7 @@ export type EditReport = {
     rate: number | null
     date: string
     price: number
-    station: string
+    place: string
     category: string
     url: string
     description: string
