@@ -1,8 +1,9 @@
 import React, { FC, useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { push } from 'connected-react-router'
+import { RootState } from '../../reducks/store'
 import { signOut } from '../../reducks/users/operations'
-import { makeStyles, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider } from '@material-ui/core'
+import { makeStyles, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, Typography } from '@material-ui/core'
 import { ExitToApp, Launch } from '@material-ui/icons'
 import { ClickEvent } from '../../types'
 import { db } from '../../firebase'
@@ -23,12 +24,17 @@ type Filter = {
 const useStyles = makeStyles({
     root: {
         width: 200
+    },
+    username: {
+        margin: 'auto'
     }
 })
 
 const SideBarDrawer: FC<Props> = ({open, setIsOpen, onClose}) => {
     const classes = useStyles()
     const dispatch = useDispatch()
+    const selector = useSelector((state: RootState) => state)
+    const username = selector.users.username
 
     const selectMenu = (event: ClickEvent, path: string) => {
         dispatch(push(path))
@@ -70,13 +76,19 @@ const SideBarDrawer: FC<Props> = ({open, setIsOpen, onClose}) => {
 
     return (
         <Drawer
+            classes={{paper: classes.root}}
             open={open}
             anchor={"right"}
             onClose={(e) => onClose(e, false)}
-            classes={{paper: classes.root}}
             ModalProps={{keepMounted: true}}
         >
             <List>
+                <ListItem key="username">
+                    <Typography className={classes.username} color={"primary"} variant={"h6"}>
+                        {username}
+                    </Typography>
+                </ListItem>
+                <Divider />
                 <ListItem button key="logout" onClick={handleLogout}>
                     <ListItemIcon>
                         <ExitToApp />
