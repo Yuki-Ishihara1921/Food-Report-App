@@ -1,11 +1,13 @@
 import React, { FC, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { push } from 'connected-react-router'
 import { RootState } from '../reducks/store'
+import { deleteReport } from '../reducks/reports/operations'
 import { makeStyles, Link } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
-import { Update, Restaurant, Event, Train, Category } from '@material-ui/icons'
+import { Update, Restaurant, Event, Category, Room, Edit, Delete } from '@material-ui/icons'
 import { ImageSwiper } from '../components/reports'
-import { TextReadOnly } from '../components/UIkit'
+import { TextReadOnly, ButtonClick } from '../components/UIkit'
 import { db } from '../firebase'
 import firebase from 'firebase/app'
 
@@ -30,13 +32,15 @@ const useStyles = makeStyles((theme) => ({
     },
     sideBox: {
         [theme.breakpoints.down('sm')]: {
-            margin: 'auto 10px'
+            margin: 'auto 10px',
+            textAlign: 'left'
         },
         [theme.breakpoints.up('sm')]: {
             margin: 'auto 4rem'
         },
         [theme.breakpoints.up('md')]: {
-            margin: '2rem'
+            margin: '2rem',
+            textAlign: 'left'
         }
     },
     sideFlex: {
@@ -62,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ReportDetail: FC = () => {
     const classes = useStyles()
+    const dispatch = useDispatch()
     const selector = useSelector((state: RootState) => state.users)
     const uid = selector.uid
     const id = window.location.href.split('/reports/')[1]
@@ -142,32 +147,14 @@ const ReportDetail: FC = () => {
                     />
                 </div>
                 <div className={classes.sideBox}>
-                    <div className="display-flex">
+                    <div className={classes.sideFlex}>
                         <TextReadOnly
                             width={"100%"}
-                            label={"行った日"}
+                            label={"日付"}
                             multiline={false}
                             value={date}
                             variant={"outlined"}
                             icon={<Event />}
-                        />
-                        <TextReadOnly
-                            width={"auto"}
-                            label={"費用/1人"}
-                            multiline={false}
-                            value={price}
-                            variant={"outlined"}
-                            icon={"¥"}
-                        />
-                    </div>
-                    <div className={classes.sideFlex}>
-                        <TextReadOnly
-                            width={"100%"}
-                            label={"近くの駅"}
-                            multiline={false}
-                            value={station}
-                            variant={"outlined"}
-                            icon={<Train />}
                         />
                         <TextReadOnly
                             width={"100%"}
@@ -176,6 +163,24 @@ const ReportDetail: FC = () => {
                             value={category}
                             variant={"outlined"}
                             icon={<Category />}
+                        />
+                    </div>
+                    <div className={classes.sideFlex}>
+                        <TextReadOnly
+                            width={"100%"}
+                            label={"主な場所・近くの駅"}
+                            multiline={false}
+                            value={station}
+                            variant={"outlined"}
+                            icon={<Room />}
+                        />
+                        <TextReadOnly
+                            width={"auto"}
+                            label={"費用/1人"}
+                            multiline={false}
+                            value={price}
+                            variant={"outlined"}
+                            icon={"¥"}
                         />
                     </div>
                 </div>
@@ -187,6 +192,18 @@ const ReportDetail: FC = () => {
                 value={description}
                 variant={"outlined"}
                 icon={""}
+            />
+            <ButtonClick
+                startIcon={<Edit />}
+                color={"primary"}
+                label={"編集"}
+                onClick={() => dispatch(push('/report/edit/' + id))}
+            />
+            <ButtonClick
+                startIcon={<Delete />}
+                color={"secondary"}
+                label={"削除"}
+                onClick={() => dispatch(deleteReport(uid, id, images))}
             />
         </div>
     )

@@ -1,6 +1,6 @@
 export { default as TextInput } from './TextInput'
 export { default as TextReadOnly } from './TextReadOnly'
 export { default as SelectBox } from './SelectBox'
-export { default as ButtonPrimary } from './ButtonPrimary'
+export { default as ButtonClick } from './ButtonClick'
 export { default as ScrollToTop } from './ScrollToTop'
 export { default as Loading } from './Loading'
