@@ -143,8 +143,11 @@ const ReportEdit: FC = () => {
     return (
         <div className="editpage">
             <h2 className="text-headline">食レポ作成・編集</h2>
+            <div className="box-shadow">
+                <ImageArea images={images} setImages={setImages} />
+            </div>
             <TextInput
-                margin={""} width={"100%"} label={"店名・料理名等"} multiline={false}
+                margin={"1rem 0"} width={"100%"} label={"店名・料理名等"} multiline={false}
                 required={true} rows={1} value={name} type={"text"} variant={"outlined"}
                 icon={<Restaurant />} onChange={inputName}
             />
@@ -197,9 +200,6 @@ const ReportEdit: FC = () => {
                 required={false} rows={0} value={description} type={"text"} variant={"outlined"}
                 icon={""} onChange={inputDescription}
             />
-            <div className="box-shadow">
-                <ImageArea images={images} setImages={setImages} />
-            </div>
             <ButtonPrimary startIcon={<Save />} label={"保存"} onClick={handleSaveReport} />
         </div>
     )
