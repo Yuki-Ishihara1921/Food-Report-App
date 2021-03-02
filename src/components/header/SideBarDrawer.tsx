@@ -23,7 +23,7 @@ type Filter = {
 
 const useStyles = makeStyles({
     root: {
-        width: 200
+        width: 190
     },
     username: {
         margin: 'auto'
