@@ -113,7 +113,7 @@ const ReportCard: FC<Props> = ({id, name, images, rate}) => {
                     </MenuItem>
                     <MenuItem
                         onClick={() => {
-                            dispatch(deleteReport(uid, id))
+                            dispatch(deleteReport(uid, id, images))
                             handleClose()
                         }}
                     >

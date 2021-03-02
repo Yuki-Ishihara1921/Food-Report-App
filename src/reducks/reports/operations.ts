@@ -1,9 +1,9 @@
 import { Dispatch } from "redux"
 import { push } from "connected-react-router"
 import { fetchReportsAction } from "./actions"
-import { EditReport, ReportData } from "./types"
+import { EditReport, Image, ReportData } from "./types"
 import { showLoadingAction, hideLoadingAction } from "../loading/actions"
-import { db, FirebaseTimestamp } from "../../firebase"
+import { db, FirebaseTimestamp, storage } from "../../firebase"
 
 const usersRef = db.collection('users')
 
@@ -76,7 +76,7 @@ export const saveReport = (uid: string, editReport: EditReport) => {
     }
 }
 
-export const deleteReport = (uid: string, reportId: string) => {
+export const deleteReport = (uid: string, reportId: string, images: Image[]) => {
     return async (dispatch: Dispatch, getState: any) => {
         const res = window.confirm("こちらのレポートを削除しますか？")
         if (!res) {
@@ -85,6 +85,9 @@ export const deleteReport = (uid: string, reportId: string) => {
             dispatch(showLoadingAction("削除中..."))
             usersRef.doc(uid).collection('reports').doc(reportId).delete()
             .then(() => {
+                for (let i = 0; i < images.length; i++) {
+                    storage.ref('images').child(images[i].id).delete()
+                }
                 const prevReports: ReportData[] = getState().reports.list
                 const nextReports = prevReports.filter((report: ReportData) => report.id !== reportId)
                 dispatch(fetchReportsAction(nextReports))
