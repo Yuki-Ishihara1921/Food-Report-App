@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { push } from 'connected-react-router'
 import { RootState } from '../reducks/store'
 import { fetchReports } from '../reducks/reports/operations'
+import { Launch } from '@material-ui/icons'
 import { ReportCard } from '../components/reports'
 import { ButtonPrimary } from '../components/UIkit'
 
@@ -31,7 +32,7 @@ const ReportList: FC = () => {
                     ))
                 ) : (
                     <ButtonPrimary
-                        startIcon={""}
+                        startIcon={<Launch />}
                         label={"新規作成"}
                         onClick={() => dispatch(push('/report/edit'))}
                     />
