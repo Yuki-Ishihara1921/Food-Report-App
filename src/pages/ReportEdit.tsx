@@ -8,7 +8,7 @@ import { makeStyles, InputLabel } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
 import { Restaurant, Train, Language, Save } from '@material-ui/icons'
 import { ImageArea } from '../components/reports'
-import { TextInput, SelectBox, SaveButton } from '../components/UIkit'
+import { TextInput, SelectBox, ButtonPrimary } from '../components/UIkit'
 import { ChangeEvent } from '../types'
 import { db } from '../firebase'
 
@@ -200,7 +200,7 @@ const ReportEdit: FC = () => {
             <div className="box-shadow">
                 <ImageArea images={images} setImages={setImages} />
             </div>
-            <SaveButton startIcon={<Save />} label={"保存"} onClick={handleSaveReport} />
+            <ButtonPrimary startIcon={<Save />} label={"保存"} onClick={handleSaveReport} />
         </div>
     )
 }

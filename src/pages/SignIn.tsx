@@ -4,7 +4,7 @@ import { push } from 'connected-react-router'
 import { signIn } from '../reducks/users/operations'
 import { Link } from '@material-ui/core'
 import { Mail, Lock } from '@material-ui/icons'
-import { TextInput, SaveButton } from '../components/UIkit'
+import { TextInput, ButtonPrimary } from '../components/UIkit'
 import { ChangeEvent } from '../types'
 
 const SignIn: FC = () => {
@@ -35,7 +35,7 @@ const SignIn: FC = () => {
                     required={true} rows={1} value={password} type={"password"} variant={"standard"}
                     icon={<Lock />} onChange={inputPassword}
                 />
-                <SaveButton
+                <ButtonPrimary
                     startIcon={""}
                     label={"ログイン"}
                     onClick={() => dispatch(signIn(email, password))}

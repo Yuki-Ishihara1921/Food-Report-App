@@ -9,11 +9,11 @@ type Props = {
 
 const useStyles = makeStyles({
     root: {
-        margin: 25
+        margin: '25px auto'
     }
 })
 
-const SaveButton: FC<Props> = ({startIcon, label, onClick}) => {
+const ButtonPrimary: FC<Props> = ({startIcon, label, onClick}) => {
     const classes = useStyles()
     return (
         <Button
@@ -28,4 +28,4 @@ const SaveButton: FC<Props> = ({startIcon, label, onClick}) => {
     )
 }
 
-export default SaveButton
+export default ButtonPrimary
