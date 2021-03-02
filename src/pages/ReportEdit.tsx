@@ -105,7 +105,7 @@ const ReportEdit: FC = () => {
                     setRate(data.rate)
                     setDate(data.date)
                     setPrice(data.price)
-                    setPlace(data.station)
+                    setPlace(data.place)
                     setCategory(data.category)
                     setDescription(data.description)
                 }

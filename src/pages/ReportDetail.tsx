@@ -78,7 +78,7 @@ const ReportDetail: FC = () => {
           [rate, setRate] = useState<number | null>(0),
           [date, setDate] = useState<string>(""),
           [price, setPrice] = useState<number>(0),
-          [station, setStation] = useState<string>(""),
+          [place, setPlace] = useState<string>(""),
           [category, setCategory] = useState<string>(""),
           [description, setDescription] = useState<string>("")
 
@@ -102,7 +102,7 @@ const ReportDetail: FC = () => {
                     setRate(data.rate)
                     setDate(data.date)
                     setPrice(data.price)
-                    setStation(data.station)
+                    setPlace(data.place)
                     setCategory(data.category)
                     setDescription(data.description)
                     setUpdatedAt(datetimeToString(data.updated_at.toDate()))
@@ -170,7 +170,7 @@ const ReportDetail: FC = () => {
                             width={"100%"}
                             label={"主な場所・近くの駅"}
                             multiline={false}
-                            value={station}
+                            value={place}
                             variant={"outlined"}
                             icon={<Room />}
                         />

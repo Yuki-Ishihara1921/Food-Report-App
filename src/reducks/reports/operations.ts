@@ -24,7 +24,7 @@ export const fetchReports = (uid: string, category: string) => {
                     rate: report.rate,
                     date: report.date,
                     price: report.price,
-                    place: report.station,
+                    place: report.place,
                     category: report.category,
                     url: report.url,
                     description: report.description,
