@@ -5,7 +5,7 @@ import { RootState } from '../reducks/store'
 import { fetchReports } from '../reducks/reports/operations'
 import { Launch } from '@material-ui/icons'
 import { ReportCard } from '../components/reports'
-import { ButtonPrimary } from '../components/UIkit'
+import { ButtonClick } from '../components/UIkit'
 
 const ReportList: FC = () => {
     const dispatch = useDispatch()
@@ -26,15 +26,14 @@ const ReportList: FC = () => {
                 {reports.length > 0 ? (
                     reports.map(report => (
                         <ReportCard
-                            key={report.id} id={report.id} name={report.name} 
-                            images={report.images} rate={report.rate}
+                            key={report.id} id={report.id} images={report.images} 
+                            name={report.name} place={report.place} rate={report.rate}
                         />
                     ))
                 ) : (
-                    <ButtonPrimary
-                        startIcon={<Launch />}
-                        label={"新規作成"}
-                        onClick={() => dispatch(push('/report/edit'))}
+                    <ButtonClick
+                        startIcon={<Launch />} color={"primary"}
+                        label={"新規作成"} onClick={() => dispatch(push('/report/edit'))}
                     />
                 )}
             </div>
