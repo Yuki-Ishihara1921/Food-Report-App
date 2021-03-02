@@ -89,7 +89,6 @@ const ReportCard: FC<Props> = ({id, name, images, place, rate}) => {
             <Rating
                 name="rating-readonly"
                 size={"large"}
-                style={{margin: 'auto'}}
                 readOnly
                 value={rate}
             />

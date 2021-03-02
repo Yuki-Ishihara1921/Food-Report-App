@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
     imageBox: {
         margin: '10px auto',
+        boxShadow: '0px 0px 5px 0px',
         [theme.breakpoints.down('md')]: {
             maxWidth: 500
         },
@@ -32,15 +33,13 @@ const useStyles = makeStyles((theme) => ({
     },
     sideBox: {
         [theme.breakpoints.down('sm')]: {
-            margin: 'auto 10px',
-            textAlign: 'left'
+            margin: 'auto 10px'
         },
         [theme.breakpoints.up('sm')]: {
             margin: 'auto 4rem'
         },
         [theme.breakpoints.up('md')]: {
-            margin: '2rem',
-            textAlign: 'left'
+            margin: 'auto 2rem'
         }
     },
     sideFlex: {
@@ -52,14 +51,10 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     rateBox: {
-        marginBottom: 20,
         padding: '5px 10px',
         boxShadow: '0px 2px 0px -1px gray',
         [theme.breakpoints.down('sm')]: {
-            fontSize: 30
-        },
-        [theme.breakpoints.up('sm')]: {
-            fontSize: 40
+            marginBottom: 20
         }
     }
 }))
@@ -140,16 +135,14 @@ const ReportDetail: FC = () => {
                         <ImageSwiper images={images} />
                     </div>
                     <Rating
-                        className={classes.rateBox}
-                        name="rate-detail"
-                        readOnly
-                        value={rate} size={"large"}
+                        className={classes.rateBox} name="rate-detail"
+                        readOnly size={"large"} value={rate}
                     />
                 </div>
                 <div className={classes.sideBox}>
                     <div className={classes.sideFlex}>
                         <TextReadOnly
-                            width={"100%"}
+                            width={""}
                             label={"日付"}
                             multiline={false}
                             value={date}
@@ -157,7 +150,7 @@ const ReportDetail: FC = () => {
                             icon={<Event />}
                         />
                         <TextReadOnly
-                            width={"100%"}
+                            width={""}
                             label={"カテゴリー"}
                             multiline={false}
                             value={category}
@@ -167,7 +160,7 @@ const ReportDetail: FC = () => {
                     </div>
                     <div className={classes.sideFlex}>
                         <TextReadOnly
-                            width={"100%"}
+                            width={""}
                             label={"主な場所・近くの駅"}
                             multiline={false}
                             value={place}
@@ -175,7 +168,7 @@ const ReportDetail: FC = () => {
                             icon={<Room />}
                         />
                         <TextReadOnly
-                            width={"auto"}
+                            width={""}
                             label={"費用/1人"}
                             multiline={false}
                             value={price}

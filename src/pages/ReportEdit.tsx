@@ -15,8 +15,7 @@ import { db } from '../firebase'
 const useStyles = makeStyles((theme) => ({
     itemsBox: {
         [theme.breakpoints.down('sm')]: {
-            margin: '1rem 3rem',
-            textAlign: 'left'
+            margin: '1rem 3rem'
         },
         [theme.breakpoints.up('sm')]: {
             margin: '1rem'
@@ -29,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             display: 'flex'
         }
+    },
+    rateBox: {
+        marginBottom: 20,
+        padding: 5,
+        boxShadow: '0px 2px 0px -1px gray',
     }
 }))
 
@@ -154,42 +158,41 @@ const ReportEdit: FC = () => {
             <div className={classes.itemsBox}>
                 <div className={classes.itemsFlex}>
                     <TextInput
-                        margin={""} width={"170px"} label={"日付"} multiline={false}
+                        margin={"10px auto"} width={"170px"} label={"日付"} multiline={false}
                         required={false} rows={1} value={date} type={"date"} variant={"standard"}
                         icon={""} onChange={inputDate}
                     />
                     <div className="margin-auto">
                         <SelectBox
                             label={"カテゴリー"} required={true} options={categories}
-                            select={setCategory} value={category}
+                            value={category} select={setCategory}
                         />
                     </div>
                 </div>
                 <div className={classes.itemsFlex}>
                     <TextInput
-                        margin={""} width={"200px"} label={"主な場所・近くの駅"} multiline={false}
+                        margin={"10px auto"} width={"200px"} label={"主な場所・近くの駅"} multiline={false}
                         required={false} rows={1} value={place} type={"text"} variant={"standard"}
                         icon={<Room />} onChange={inputPlace}
                     />
                     <TextInput
-                        margin={"auto"} width={"100px"} label={"費用(1人分)"} multiline={false}
+                        margin={"10px auto"} width={"100px"} label={"費用(1人分)"} multiline={false}
                         required={false} rows={1} value={price} type={"number"} variant={"standard"}
                         icon={"¥"} onChange={inputPrice}
                     />
                 </div>
             </div>
-            <div>
-                <InputLabel>評価</InputLabel>
-                <Rating
-                    name="rate-edit"
-                    value={rate}
-                    size="large"
-                    max={5}
-                    onChange={(e, newValue) => {
-                        setRate(newValue)
-                    }}
-                />
-            </div>
+            <InputLabel>評価</InputLabel>
+            <Rating
+                className={classes.rateBox}
+                name="rate-edit"
+                value={rate}
+                size="large"
+                max={5}
+                onChange={(e, newValue) => {
+                    setRate(newValue)
+                }}
+            />
             <TextInput
                 margin={"0 15px 15px"} width={"100%"} label={"ウェブサイトURL"} multiline={true}
                 required={false} rows={0} value={url} type={"text"} variant={"outlined"}

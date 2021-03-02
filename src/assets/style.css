@@ -18,6 +18,7 @@
 .reportPage {
   max-width: 760px;
   margin: 0 auto;
+  padding: 0 10px;
   text-align: center;
 }
 
@@ -31,6 +32,7 @@
 .editpage {
   max-width: 500px;
   margin: 0 auto;
+  padding: 0 15px;
   text-align: center;
 }
 
