@@ -6,9 +6,9 @@ import { saveReport } from '../reducks/reports/operations'
 import { Image, Category, EditReport } from '../reducks/reports/types'
 import { makeStyles, InputLabel } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
-import { Restaurant, Train, Language, Save } from '@material-ui/icons'
+import { Restaurant, Room, Language, Save } from '@material-ui/icons'
 import { ImageArea } from '../components/reports'
-import { TextInput, SelectBox, ButtonPrimary } from '../components/UIkit'
+import { TextInput, SelectBox, ButtonClick } from '../components/UIkit'
 import { ChangeEvent } from '../types'
 import { db } from '../firebase'
 
@@ -47,7 +47,7 @@ const ReportEdit: FC = () => {
           [rate, setRate] = useState<number | null>(0),
           [date, setDate] = useState<string>(moment().format('YYYY-MM-DD')),
           [price, setPrice] = useState<number>(0),
-          [station, setStation] = useState<string>(""),
+          [place, setPlace] = useState<string>(""),
           [category, setCategory] = useState<string>(""),
           [url, setUrl] = useState<string>(""),
           [description, setDescription] = useState<string>(""),
@@ -65,9 +65,9 @@ const ReportEdit: FC = () => {
         setPrice(Number(e.target.value))
     }, [setPrice])
 
-    const inputStation = useCallback((e: ChangeEvent) => {
-        setStation(e.target.value)
-    }, [setStation])
+    const inputPlace = useCallback((e: ChangeEvent) => {
+        setPlace(e.target.value)
+    }, [setPlace])
 
     const inputUrl = useCallback((e: ChangeEvent) => {
         setUrl(e.target.value)
@@ -85,7 +85,7 @@ const ReportEdit: FC = () => {
             rate: rate,
             date: date,
             price: price,
-            station: station,
+            place: place,
             category: category,
             url: url,
             description: description
@@ -105,7 +105,7 @@ const ReportEdit: FC = () => {
                     setRate(data.rate)
                     setDate(data.date)
                     setPrice(data.price)
-                    setStation(data.station)
+                    setPlace(data.station)
                     setCategory(data.category)
                     setDescription(data.description)
                 }
@@ -117,7 +117,7 @@ const ReportEdit: FC = () => {
             setRate(0)
             setDate(moment().format('YYYY-MM-DD'))
             setPrice(0)
-            setStation("")
+            setPlace("")
             setCategory("")
             setDescription("")
         }
@@ -154,21 +154,9 @@ const ReportEdit: FC = () => {
             <div className={classes.itemsBox}>
                 <div className={classes.itemsFlex}>
                     <TextInput
-                        margin={""} width={"170px"} label={"行った日"} multiline={false}
+                        margin={""} width={"170px"} label={"日付"} multiline={false}
                         required={false} rows={1} value={date} type={"date"} variant={"standard"}
                         icon={""} onChange={inputDate}
-                    />
-                    <TextInput
-                        margin={"auto"} width={"100px"} label={"費用(1人分)"} multiline={false}
-                        required={false} rows={1} value={price} type={"number"} variant={"standard"}
-                        icon={"¥"} onChange={inputPrice}
-                    />
-                </div>
-                <div className={classes.itemsFlex}>
-                    <TextInput
-                        margin={""} width={"200px"} label={"近くの駅"} multiline={false}
-                        required={false} rows={1} value={station} type={"text"} variant={"standard"}
-                        icon={<Train />} onChange={inputStation}
                     />
                     <div className="margin-auto">
                         <SelectBox
@@ -176,6 +164,18 @@ const ReportEdit: FC = () => {
                             select={setCategory} value={category}
                         />
                     </div>
+                </div>
+                <div className={classes.itemsFlex}>
+                    <TextInput
+                        margin={""} width={"200px"} label={"主な場所・近くの駅"} multiline={false}
+                        required={false} rows={1} value={place} type={"text"} variant={"standard"}
+                        icon={<Room />} onChange={inputPlace}
+                    />
+                    <TextInput
+                        margin={"auto"} width={"100px"} label={"費用(1人分)"} multiline={false}
+                        required={false} rows={1} value={price} type={"number"} variant={"standard"}
+                        icon={"¥"} onChange={inputPrice}
+                    />
                 </div>
             </div>
             <div>
@@ -200,7 +200,10 @@ const ReportEdit: FC = () => {
                 required={false} rows={0} value={description} type={"text"} variant={"outlined"}
                 icon={""} onChange={inputDescription}
             />
-            <ButtonPrimary startIcon={<Save />} label={"保存"} onClick={handleSaveReport} />
+            <ButtonClick
+                startIcon={<Save />} color={"primary"}
+                label={"保存"} onClick={handleSaveReport}
+            />
         </div>
     )
 }
