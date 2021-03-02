@@ -30,7 +30,8 @@ const TextInput: FC<Props> = ({margin, width, label, multiline, required, rows, 
                 type={type}
                 variant={variant}
                 InputProps={{
-                    startAdornment: <InputAdornment position="start">{icon}</InputAdornment>
+                    startAdornment: <InputAdornment position="start">{icon}</InputAdornment>,
+                    inputProps: { min: 0 }
                 }}
                 onChange={onChange}
             />
