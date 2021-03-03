@@ -22,22 +22,18 @@
   text-align: center;
 }
 
-.reportPage_container {
+.reportPage-reportList {
   display: flex;
   flex-flow: row wrap;
 }
 
 /* page - ReportEdit */
 
-.editpage {
+.editPage {
   max-width: 500px;
   margin: 0 auto;
   padding: 0 15px;
   text-align: center;
-}
-
-.box-shadow {
-  box-shadow: 0px 0px 5px 0px gray;
 }
 
 /* component - ImageArea ImagePreview */
@@ -98,15 +94,7 @@
 /* common styles */
 
 .page-main {
-  padding: 70px 0
-}
-
-.display-flex {
-  display: flex;
-}
-
-.margin-auto {
-  margin: auto;
+  padding: 60px 0
 }
 
 .text-headline {
