@@ -6,35 +6,25 @@ import { saveReport } from '../reducks/reports/operations'
 import { Image, Category, EditReport } from '../reducks/reports/types'
 import { makeStyles, InputLabel } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
-import { Restaurant, Room, Language, Save } from '@material-ui/icons'
+import { Restaurant, Room, Language, Save, Train } from '@material-ui/icons'
 import { ImageArea } from '../components/reports'
 import { TextInput, SelectBox, ButtonClick } from '../components/UIkit'
 import { ChangeEvent } from '../types'
 import { db } from '../firebase'
 
-const useStyles = makeStyles((theme) => ({
-    itemsBox: {
-        [theme.breakpoints.down('sm')]: {
-            margin: '1rem 3rem'
-        },
-        [theme.breakpoints.up('sm')]: {
-            margin: '1rem'
-        }
+const useStyles = makeStyles({
+    imagesBox: {
+        margin: '1rem 0',
+        boxShadow: '0px 0px 5px 0px gray'
     },
-    itemsFlex: {
-        [theme.breakpoints.down('sm')]: {
-            display: 'block',
-        },
-        [theme.breakpoints.up('sm')]: {
-            display: 'flex'
-        }
+    inputsBox: {
+        margin: '1rem 0'
     },
     rateBox: {
-        marginBottom: 20,
         padding: 5,
         boxShadow: '0px 2px 0px -1px gray',
     }
-}))
+})
 
 const ReportEdit: FC = () => {
     const classes = useStyles()
@@ -52,6 +42,7 @@ const ReportEdit: FC = () => {
           [date, setDate] = useState<string>(moment().format('YYYY-MM-DD')),
           [price, setPrice] = useState<number>(0),
           [place, setPlace] = useState<string>(""),
+          [station, setStation] = useState<string>(""),
           [category, setCategory] = useState<string>(""),
           [url, setUrl] = useState<string>(""),
           [description, setDescription] = useState<string>(""),
@@ -73,6 +64,10 @@ const ReportEdit: FC = () => {
         setPlace(e.target.value)
     }, [setPlace])
 
+    const inputStation = useCallback((e: ChangeEvent) => {
+        setStation(e.target.value)
+    }, [setStation])
+
     const inputUrl = useCallback((e: ChangeEvent) => {
         setUrl(e.target.value)
     }, [setUrl])
@@ -90,6 +85,7 @@ const ReportEdit: FC = () => {
             date: date,
             price: price,
             place: place,
+            station: station,
             category: category,
             url: url,
             description: description
@@ -110,6 +106,7 @@ const ReportEdit: FC = () => {
                     setDate(data.date)
                     setPrice(data.price)
                     setPlace(data.place)
+                    setStation(data.station)
                     setCategory(data.category)
                     setDescription(data.description)
                 }
@@ -122,6 +119,7 @@ const ReportEdit: FC = () => {
             setDate(moment().format('YYYY-MM-DD'))
             setPrice(0)
             setPlace("")
+            setStation("")
             setCategory("")
             setDescription("")
         }
@@ -145,69 +143,70 @@ const ReportEdit: FC = () => {
     }, [])
 
     return (
-        <div className="editpage">
+        <section className="editPage">
             <h2 className="text-headline">食レポ作成・編集</h2>
-            <div className="box-shadow">
+            <div className={classes.imagesBox}>
                 <ImageArea images={images} setImages={setImages} />
             </div>
-            <TextInput
-                margin={"1rem 0"} width={"100%"} label={"店名・料理名等"} multiline={false}
-                required={true} rows={1} value={name} type={"text"} variant={"outlined"}
-                icon={<Restaurant />} onChange={inputName}
-            />
-            <div className={classes.itemsBox}>
-                <div className={classes.itemsFlex}>
-                    <TextInput
-                        margin={"10px auto"} width={"170px"} label={"日付"} multiline={false}
-                        required={false} rows={1} value={date} type={"date"} variant={"standard"}
-                        icon={""} onChange={inputDate}
-                    />
-                    <div className="margin-auto">
-                        <SelectBox
-                            label={"カテゴリー"} required={true} options={categories}
-                            value={category} select={setCategory}
-                        />
-                    </div>
-                </div>
-                <div className={classes.itemsFlex}>
-                    <TextInput
-                        margin={"10px auto"} width={"200px"} label={"主な場所・近くの駅"} multiline={false}
-                        required={false} rows={1} value={place} type={"text"} variant={"standard"}
-                        icon={<Room />} onChange={inputPlace}
-                    />
-                    <TextInput
-                        margin={"10px auto"} width={"100px"} label={"費用(1人分)"} multiline={false}
-                        required={false} rows={1} value={price} type={"number"} variant={"standard"}
-                        icon={"¥"} onChange={inputPrice}
-                    />
+            <div className={classes.inputsBox}>
+                <TextInput
+                    width={"100%"} label={"店名・料理名等"} multiline={false}
+                    required={true} rows={1} value={name} type={"text"}
+                    variant={"outlined"} icon={<Restaurant />} onChange={inputName}
+                />
+                <div>
+                <TextInput
+                    width={"145px"} label={"日付"} multiline={false}
+                    required={false} rows={1} value={date} type={"date"}
+                    variant={"standard"} icon={""} onChange={inputDate}
+                />
+                <TextInput
+                    width={"85px"} label={"費用(1人分)"} multiline={false}
+                    required={false} rows={1} value={price} type={"number"}
+                    variant={"standard"} icon={"¥"} onChange={inputPrice}
+                />
+                <SelectBox
+                    label={"カテゴリー"} required={true} options={categories}
+                    value={category} select={setCategory}
+                />
+                <TextInput
+                    width={""} label={"主な場所"} multiline={false}
+                    required={false} rows={1} value={place} type={"text"}
+                    variant={"standard"} icon={<Room />} onChange={inputPlace}
+                />
+                <TextInput
+                    width={""} label={"近くの駅"} multiline={false}
+                    required={false} rows={1} value={station} type={"text"}
+                    variant={"standard"} icon={<Train />} onChange={inputStation}
+                />
+                <InputLabel>評価</InputLabel>
+                <Rating
+                    className={classes.rateBox}
+                    name="rate-edit"
+                    value={rate}
+                    size="medium"
+                    max={5}
+                    onChange={(e, newValue) => {
+                        setRate(newValue)
+                    }}
+                />
                 </div>
             </div>
-            <InputLabel>評価</InputLabel>
-            <Rating
-                className={classes.rateBox}
-                name="rate-edit"
-                value={rate}
-                size="large"
-                max={5}
-                onChange={(e, newValue) => {
-                    setRate(newValue)
-                }}
+            <TextInput
+                width={"100%"} label={"ウェブサイトURL"} multiline={true}
+                required={false} rows={0} value={url} type={"text"}
+                variant={"outlined"} icon={<Language />} onChange={inputUrl}
             />
             <TextInput
-                margin={"0 15px 15px"} width={"100%"} label={"ウェブサイトURL"} multiline={true}
-                required={false} rows={0} value={url} type={"text"} variant={"outlined"}
-                icon={<Language />} onChange={inputUrl}
-            />
-            <TextInput
-                margin={"0 0 15px"} width={"100%"} label={"レビュー"} multiline={true}
-                required={false} rows={0} value={description} type={"text"} variant={"outlined"}
-                icon={""} onChange={inputDescription}
+                width={"100%"} label={"レビュー"} multiline={true}
+                required={false} rows={0} value={description} type={"text"}
+                variant={"outlined"} icon={""} onChange={inputDescription}
             />
             <ButtonClick
                 startIcon={<Save />} color={"primary"}
                 label={"保存"} onClick={handleSaveReport}
             />
-        </div>
+        </section>
     )
 }
 

@@ -5,7 +5,7 @@ import { RootState } from '../reducks/store'
 import { deleteReport } from '../reducks/reports/operations'
 import { makeStyles, Link } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
-import { Update, Restaurant, Event, Category, Room, Edit, Delete } from '@material-ui/icons'
+import { Update, Restaurant, Event, Category, Room, Train, Edit, Delete } from '@material-ui/icons'
 import { ImageSwiper } from '../components/reports'
 import { TextReadOnly, ButtonClick } from '../components/UIkit'
 import { db } from '../firebase'
@@ -33,13 +33,13 @@ const useStyles = makeStyles((theme) => ({
     },
     sideBox: {
         [theme.breakpoints.down('sm')]: {
-            margin: 'auto 10px'
+            margin: 'auto'
         },
         [theme.breakpoints.up('sm')]: {
             margin: 'auto 4rem'
         },
         [theme.breakpoints.up('md')]: {
-            margin: 'auto 2rem'
+            margin: 'auto 1rem'
         }
     },
     sideFlex: {
@@ -74,6 +74,7 @@ const ReportDetail: FC = () => {
           [date, setDate] = useState<string>(""),
           [price, setPrice] = useState<number>(0),
           [place, setPlace] = useState<string>(""),
+          [station, setStation] = useState<string>(""),
           [category, setCategory] = useState<string>(""),
           [description, setDescription] = useState<string>("")
 
@@ -98,6 +99,7 @@ const ReportDetail: FC = () => {
                     setDate(data.date)
                     setPrice(data.price)
                     setPlace(data.place)
+                    setStation(data.station)
                     setCategory(data.category)
                     setDescription(data.description)
                     setUpdatedAt(datetimeToString(data.updated_at.toDate()))
@@ -127,7 +129,7 @@ const ReportDetail: FC = () => {
                 icon={<Restaurant />}
             />
             <div className={classes.itemsBox}>
-                <div>
+                <div className={classes.sideBox}>
                     {url && (
                         <Link href={url} target="_blank">Webサイト</Link>
                     )}
@@ -140,42 +142,46 @@ const ReportDetail: FC = () => {
                     />
                 </div>
                 <div className={classes.sideBox}>
-                    <div className={classes.sideFlex}>
-                        <TextReadOnly
-                            width={""}
-                            label={"日付"}
-                            multiline={false}
-                            value={date}
-                            variant={"outlined"}
-                            icon={<Event />}
-                        />
-                        <TextReadOnly
-                            width={""}
-                            label={"カテゴリー"}
-                            multiline={false}
-                            value={category}
-                            variant={"outlined"}
-                            icon={<Category />}
-                        />
-                    </div>
-                    <div className={classes.sideFlex}>
-                        <TextReadOnly
-                            width={""}
-                            label={"主な場所・近くの駅"}
-                            multiline={false}
-                            value={place}
-                            variant={"outlined"}
-                            icon={<Room />}
-                        />
-                        <TextReadOnly
-                            width={""}
-                            label={"費用/1人"}
-                            multiline={false}
-                            value={price}
-                            variant={"outlined"}
-                            icon={"¥"}
-                        />
-                    </div>
+                    <TextReadOnly
+                        width={"150px"}
+                        label={"日付"}
+                        multiline={false}
+                        value={date}
+                        variant={"outlined"}
+                        icon={<Event />}
+                    />
+                    <TextReadOnly
+                        width={"100px"}
+                        label={"費用/1人"}
+                        multiline={false}
+                        value={price}
+                        variant={"outlined"}
+                        icon={"¥"}
+                    />
+                    <TextReadOnly
+                        width={"175px"}
+                        label={"カテゴリー"}
+                        multiline={false}
+                        value={category}
+                        variant={"outlined"}
+                        icon={<Category />}
+                    />
+                    <TextReadOnly
+                        width={""}
+                        label={"主な場所"}
+                        multiline={false}
+                        value={place}
+                        variant={"outlined"}
+                        icon={<Room />}
+                    />
+                    <TextReadOnly
+                        width={""}
+                        label={"近くの駅"}
+                        multiline={false}
+                        value={station}
+                        variant={"outlined"}
+                        icon={<Train />}
+                    />
                 </div>
             </div>
             <TextReadOnly
