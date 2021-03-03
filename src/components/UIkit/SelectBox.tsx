@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Category } from '../../reducks/reports/types'
-import { makeStyles, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
+import { makeStyles, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
 
 type Props = {
     label: string
@@ -10,26 +10,26 @@ type Props = {
     select: React.Dispatch<React.SetStateAction<string>>
 }
 
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-        minWidth: 150
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(2)
+const useStyles = makeStyles({
+    root: {
+        width: 175,
+        margin: '7px auto'
     }
-}))
+})
 
 const SelectBox: FC<Props> = ({label, options, required, value, select}) => {
     const classes = useStyles()
     return (
-        <FormControl className={classes.formControl}>
+        <FormControl className={classes.root}>
             <InputLabel>{label}</InputLabel>
             <Select
-                value={value} required={required}
+                required={required}  value={value} variant="standard"
                 onChange={(e: React.ChangeEvent<{ value: unknown }>) => select(String(e.target.value))}
             >
                 {options.map((category) => (
-                    <MenuItem key={category.id} value={category.name}>{category.name}</MenuItem>
+                    <MenuItem key={category.id} value={category.name}>
+                        {category.name}
+                    </MenuItem>
                 ))}
             </Select>
         </FormControl>
