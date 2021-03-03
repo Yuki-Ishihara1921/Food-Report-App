@@ -1,8 +1,7 @@
-import React, { FC, useCallback } from 'react'
+import React, { FC, useState, useCallback } from 'react'
 import { Image } from '../../reducks/reports/types'
-import ImagePreview from './ImagePreview'
 import { storage } from '../../firebase'
-import { makeStyles, IconButton } from '@material-ui/core'
+import { makeStyles, CircularProgress, IconButton } from '@material-ui/core'
 import { AddPhotoAlternate } from '@material-ui/icons'
 
 type Props = {
@@ -11,17 +10,23 @@ type Props = {
 }
 
 const useStyles = makeStyles({
-    icon: {
+    iconButton: {
         width: 48,
-        marginRight: 8,
-        height: 48
+        height: 48,
+        marginRight: 8
+    },
+    circleProgress: {
+        margin: 40
     }
+
 })
 
 const ImageArea: FC<Props> = ({images, setImages}) => {
     const classes = useStyles()
+    const [isUploading, setIsUploading] = useState<boolean>(false)
 
     const uploadImage = useCallback((e) => {
+        setIsUploading(true)
         const file = e.target.files
         let blob = new Blob(file, { type: "image/jpeg" })
         const S = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -34,10 +39,12 @@ const ImageArea: FC<Props> = ({images, setImages}) => {
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
                 const newImage: Image = { id: fileName, path: downloadURL }
                 setImages(((prevState) => [...prevState, newImage]))
+                setIsUploading(false)
             })
         })
         .catch(() => {
             alert("画像が登録できませんでした。通信環境をご確認の上、再登録して下さい。")
+            setIsUploading(false)
             return false
         })
     }, [setImages])
@@ -57,7 +64,7 @@ const ImageArea: FC<Props> = ({images, setImages}) => {
         <>
             <div className="text-right">
                 <span>画像を登録</span>
-                <IconButton className={classes.icon}>
+                <IconButton className={classes.iconButton}>
                     <label>
                         <AddPhotoAlternate />
                         <input
@@ -67,16 +74,22 @@ const ImageArea: FC<Props> = ({images, setImages}) => {
                     </label>
                 </IconButton>
             </div>
-            <div className="imageList">
-                {images.length > 0 && (
-                    images.map((image: Image) =>
-                        <ImagePreview
-                            key={image.id} id={image.id}
-                            path={image.path} deleteImage={deleteImage}
-                        />
-                    )
-                )}
-            </div>
+            {isUploading ? (
+                <CircularProgress className={classes.circleProgress} />
+            ) : (
+                <div className="imageList">
+                    {images.length > 0 && (
+                        images.map((image: Image) =>
+                        <div className="image__container" key={image.id}>
+                            <img
+                                src={image.path} alt="レポート画像"
+                                onClick={() => deleteImage(image.id)}
+                            />
+                        </div>
+                        )
+                    )}
+                </div>
+            )}
         </>
     )
 }
