@@ -1,41 +1,46 @@
 import React, { FC } from 'react'
-import { TextField, InputAdornment } from '@material-ui/core'
+import { makeStyles, InputAdornment, TextField } from '@material-ui/core'
 import { ChangeEvent } from '../../types'
 
 type Props = {
-    margin: string
-    width: string
+    icon: string | JSX.Element
     label: string
     multiline: boolean
     required: boolean
     rows: number
-    value: string | number
     type: string
+    value: string | number
     variant: "standard" | "filled" | "outlined" | undefined
-    icon: string | JSX.Element
+    width: string
     onChange: (e: ChangeEvent) => void
 }
 
-const TextInput: FC<Props> = ({margin, width, label, multiline, required, rows, value, type, variant, icon, onChange}) => {
+const useStyles = makeStyles({
+    root: {
+        margin: '10px auto'
+    }
+})
+
+const TextInput: FC<Props> = ({icon, label, multiline, required, rows, type, value, variant, width, onChange}) => {
+    const classes = useStyles()
     return (
-        <div style={{margin: margin}}>
-            <TextField
-                style={{width: width}}
-                label={label}
-                margin="dense"
-                multiline={multiline}
-                required={required}
-                rows={rows}
-                value={value}
-                type={type}
-                variant={variant}
-                InputProps={{
-                    startAdornment: <InputAdornment position="start">{icon}</InputAdornment>,
-                    inputProps: { min: 0 }
-                }}
-                onChange={onChange}
-            />
-        </div>
+        <TextField
+            className={classes.root}
+            label={label}
+            margin="dense"
+            multiline={multiline}
+            required={required}
+            rows={rows}
+            style={{width: width}}
+            type={type}
+            value={value}
+            variant={variant}
+            InputProps={{
+                startAdornment: <InputAdornment position="start">{icon}</InputAdornment>,
+                inputProps: { min: 0 }
+            }}
+            onChange={onChange}
+        />
     )
 }
 
