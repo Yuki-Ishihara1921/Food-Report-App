@@ -22,7 +22,7 @@ const ReportList: FC = () => {
     return (
         <div className="reportPage">
             <h2 className="text-headline">食レポ一覧</h2>
-            <div className="reportPage_container">
+            <div className="reportPage-reportList">
                 {reports.length > 0 ? (
                     reports.map(report => (
                         <ReportCard
