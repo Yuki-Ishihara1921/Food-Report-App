@@ -8,7 +8,7 @@ import {
     CardMedia, Divider, Typography
 } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
-import { Room } from '@material-ui/icons'
+import { FilterNone, Room } from '@material-ui/icons'
 
 type Props = {
     id: string
@@ -35,8 +35,15 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     media: {
+        position: 'relative',
         height: '0',
         paddingTop: '70%'
+    },
+    filterIcon: {
+        position: 'absolute',
+        right: 10,
+        bottom: 10,
+        color: '#fff'
     },
     content: {
         display: 'flex',
@@ -77,11 +84,11 @@ const ReportCard: FC<Props> = ({id, name, images, place, rate}) => {
                     {name}
                 </Typography>
             </CardContent>
-            <CardMedia
-                className={classes.media}
-                image={cardImages}
-                title="詳細"
-            />
+            <CardMedia className={classes.media} image={cardImages} title="詳細">
+                {images.length >= 2 && (
+                    <FilterNone className={classes.filterIcon} />
+                )}
+            </CardMedia>
             <CardContent className={classes.content}>
                 <Room className={classes.icon} />
                 <Typography component="h6">
