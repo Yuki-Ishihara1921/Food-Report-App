@@ -101,7 +101,7 @@ const ReportDetail: FC = () => {
     }, [uid, id])
 
     return (
-        <div className="reportPage">
+        <section className="reportPage">
             <div className="text-right">
                 <TextReadOnly
                     icon={<Update />} label={"最終更新日"} multiline={false}
@@ -160,7 +160,7 @@ const ReportDetail: FC = () => {
                 color={"secondary"} label={"削除"} startIcon={<Delete />}
                 onClick={() => dispatch(deleteReport(uid, id, images))}
             />
-        </div>
+        </section>
     )
 }
 

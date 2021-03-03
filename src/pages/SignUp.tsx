@@ -32,7 +32,7 @@ const SignUp: FC = () => {
     }, [setConfirmPassword])
 
     return (
-        <div className="auth">
+        <section className="auth">
             <div className="auth__container">
                 <h2 className="text-headline">ユーザー登録</h2>
                 <TextInput
@@ -64,7 +64,7 @@ const SignUp: FC = () => {
                     ログインに戻る
                 </Link>
             </div>
-        </div>
+        </section>
     )
 }
 

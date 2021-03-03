@@ -22,7 +22,7 @@ const SignIn: FC = () => {
     }, [setPassword])
 
     return (
-        <div className="auth">
+        <section className="auth">
             <div className="auth__container">
                 <h2 className="text-headline">ログイン</h2>
                 <TextInput
@@ -44,7 +44,7 @@ const SignIn: FC = () => {
                     アカウント登録はこちら
                 </Link>
             </div>
-        </div>
+        </section>
     )
 }
 

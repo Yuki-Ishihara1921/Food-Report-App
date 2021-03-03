@@ -20,7 +20,7 @@ const ReportList: FC = () => {
     }, [query])
 
     return (
-        <div className="reportPage">
+        <section className="reportPage">
             <h2 className="text-headline">食レポ一覧</h2>
             <div className="reportPage-reportList">
                 {reports.length > 0 ? (
@@ -37,7 +37,7 @@ const ReportList: FC = () => {
                     />
                 )}
             </div>
-        </div>
+        </section>
     )
 }
 
