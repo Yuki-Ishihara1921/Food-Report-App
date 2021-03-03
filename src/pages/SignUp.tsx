@@ -36,22 +36,22 @@ const SignUp: FC = () => {
             <div className="auth__container">
                 <h2 className="text-headline">ユーザー登録</h2>
                 <TextInput
-                    margin={"10px"} width={"100%"} label={"ユーザー名"} multiline={false}
+                    width={"100%"} label={"ユーザー名"} multiline={false}
                     required={true} rows={1} value={username} type={"text"} variant={"standard"}
                     icon={<Person />} onChange={inputUsername}
                 />
                 <TextInput
-                    margin={"10px"} width={"100%"} label={"メールアドレス"} multiline={false}
+                    width={"100%"} label={"メールアドレス"} multiline={false}
                     required={true} rows={1} value={email} type={"email"} variant={"standard"}
                     icon={<Mail />} onChange={inputEmail}
                 />
                 <TextInput
-                    margin={"10px"} width={"100%"} label={"パスワード"} multiline={false}
+                    width={"100%"} label={"パスワード"} multiline={false}
                     required={true} rows={1} value={password} type={"password"} variant={"standard"}
                     icon={<Lock />} onChange={inputPassword}
                 />
                 <TextInput
-                    margin={"10px 10px 0"} width={"100%"} label={"パスワード(確認用)"} multiline={false}
+                    width={"100%"} label={"パスワード(確認用)"} multiline={false}
                     required={true} rows={1} value={confirmPassword} type={"password"} variant={"standard"}
                     icon={<Lock />} onChange={inputConfirmPassword}
                 />
