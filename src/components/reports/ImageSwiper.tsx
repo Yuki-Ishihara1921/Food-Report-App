@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react'
-import Swiper from 'react-id-swiper'
-import 'swiper/css/swiper.css'
 import { Image } from '../../reducks/reports/types'
 import NoImage from '../../assets/img/no_image.png'
+import Swiper from 'react-id-swiper'
+import 'swiper/css/swiper.css'
 
 type Props = {
     images: Image[]

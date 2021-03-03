@@ -1,14 +1,14 @@
 import React, { FC } from 'react'
 import TextField from '@material-ui/core/TextField'
-import { makeStyles, useTheme, useMediaQuery, InputAdornment } from '@material-ui/core'
+import { makeStyles, InputAdornment, useMediaQuery, useTheme } from '@material-ui/core'
 
 type Props = {
-    width: string
+    icon: string | JSX.Element
     label: string
     multiline: boolean
     value: string | number
     variant: "standard" | "filled" | "outlined" | undefined
-    icon: string | JSX.Element
+    width: string
 }
 
 const useStyles = makeStyles({
@@ -20,15 +20,15 @@ const useStyles = makeStyles({
 const TextReadOnly: FC<Props> = ({width, label, multiline, value, variant, icon}) => {
     const classes = useStyles()
     const theme = useTheme()
-    const moreSmWidth = useMediaQuery(theme.breakpoints.up('sm'))
+    const moreWidthSM = useMediaQuery(theme.breakpoints.up('sm'))
     
     return (
         <TextField
             className={classes.root}
-            style={{width: width}}
             label={label}
             multiline={multiline}
-            size={moreSmWidth ? 'medium' : 'small'}
+            size={moreWidthSM ? 'medium' : 'small'}
+            style={{width: width}}
             value={value}
             variant={variant}
             InputProps={{

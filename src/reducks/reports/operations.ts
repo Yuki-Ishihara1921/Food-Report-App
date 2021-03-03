@@ -19,17 +19,17 @@ export const fetchReports = (uid: string, category: string) => {
                 const report = snapshot.data()
                 reportsList.push({
                     id: report.id,
+                    updated_at: report.updated_at,
                     name: report.name,
+                    url: report.url,
                     images: report.images,
                     rate: report.rate,
                     date: report.date,
                     price: report.price,
+                    category: report.category,
                     place: report.place,
                     station: report.station,
-                    category: report.category,
-                    url: report.url,
-                    description: report.description,
-                    updated_at: report.updated_at
+                    description: report.description
                 })
             })
             dispatch(fetchReportsAction(reportsList))
@@ -53,17 +53,17 @@ export const saveReport = (uid: string, editReport: EditReport) => {
             }
             const newReport: ReportData = {
                 id: editReport.id,
+                updated_at: timestamp,
                 name: editReport.name,
+                url: editReport.url,
                 images: editReport.images,
                 rate: editReport.rate,
                 date: editReport.date,
                 price: editReport.price,
+                category: editReport.category,
                 place: editReport.place,
                 station: editReport.station,
-                category: editReport.category,
-                url: editReport.url,
-                description: editReport.description,
-                updated_at: timestamp,
+                description: editReport.description
             }
             return reportsRef.doc(editReport.id).set(newReport, { merge: true })
                 .then(() => {

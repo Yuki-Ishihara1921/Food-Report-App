@@ -3,15 +3,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { push } from 'connected-react-router'
 import { RootState } from '../../reducks/store'
 import { signOut } from '../../reducks/users/operations'
-import { makeStyles, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, Typography } from '@material-ui/core'
-import { ExitToApp, Launch } from '@material-ui/icons'
 import { ClickEvent } from '../../types'
 import { db } from '../../firebase'
+import {
+    makeStyles, Divider, Drawer, List, ListItem,
+    ListItemIcon, ListItemText, Typography
+} from '@material-ui/core'
+import { ExitToApp, Launch } from '@material-ui/icons'
 
 type Props = {
     open: boolean
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
     onClose: (event: ClickEvent, isOpen: boolean) => void
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 type Filter = {
@@ -77,10 +80,10 @@ const SideBarDrawer: FC<Props> = ({open, setIsOpen, onClose}) => {
     return (
         <Drawer
             classes={{paper: classes.root}}
-            open={open}
             anchor={"right"}
-            onClose={(e) => onClose(e, false)}
             ModalProps={{keepMounted: true}}
+            open={open}
+            onClose={(e) => onClose(e, false)}
         >
             <List>
                 <ListItem key="username">

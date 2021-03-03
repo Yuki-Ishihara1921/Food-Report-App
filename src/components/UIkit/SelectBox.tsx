@@ -23,7 +23,9 @@ const SelectBox: FC<Props> = ({label, options, required, value, select}) => {
         <FormControl className={classes.root}>
             <InputLabel>{label}</InputLabel>
             <Select
-                required={required}  value={value} variant="standard"
+                required={required}
+                value={value}
+                variant="standard"
                 onChange={(e: React.ChangeEvent<{ value: unknown }>) => select(String(e.target.value))}
             >
                 {options.map((category) => (

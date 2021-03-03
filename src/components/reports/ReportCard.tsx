@@ -2,10 +2,13 @@ import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import { push } from 'connected-react-router'
 import { Image } from '../../reducks/reports/types'
-import { makeStyles, Card, CardContent, CardMedia, Typography, Divider } from '@material-ui/core'
+import NoImage from '../../assets/img/no_image.png'
+import {
+    makeStyles, Card, CardContent,
+    CardMedia, Divider, Typography
+} from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
 import { Room } from '@material-ui/icons'
-import NoImage from '../../assets/img/no_image.png'
 
 type Props = {
     id: string
@@ -18,8 +21,8 @@ type Props = {
 const useStyles = makeStyles((theme) => ({
     root: {
         border: '10px solid lightsalmon',
-        boxShadow: '0px 2px 5px 0px',
         borderRadius: 20,
+        boxShadow: '0px 2px 5px 0px',
         background: 'floralwhite',
         cursor: 'pointer',
         [theme.breakpoints.down('sm')]: {
@@ -87,10 +90,8 @@ const ReportCard: FC<Props> = ({id, name, images, place, rate}) => {
             </CardContent>
             <Divider />
             <Rating
-                name="rating-readonly"
-                size={"large"}
-                readOnly
-                value={rate}
+                name="rating-reportCard" readOnly
+                size={"large"} value={rate}
             />
         </Card>
     )

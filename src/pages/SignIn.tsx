@@ -2,10 +2,10 @@ import React, { FC, useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { push } from 'connected-react-router'
 import { signIn } from '../reducks/users/operations'
-import { Link } from '@material-ui/core'
-import { Mail, Lock } from '@material-ui/icons'
 import { TextInput, ButtonClick } from '../components/UIkit'
 import { ChangeEvent } from '../types'
+import { Link } from '@material-ui/core'
+import { Mail, Lock } from '@material-ui/icons'
 
 const SignIn: FC = () => {
     const dispatch = useDispatch()
@@ -26,9 +26,9 @@ const SignIn: FC = () => {
             <div className="auth__container">
                 <h2 className="text-headline">ログイン</h2>
                 <TextInput
-                    width={"100%"} label={"メールアドレス"} multiline={false}
-                    required={true} rows={1} value={email} type={"email"} variant={"standard"}
-                    icon={<Mail />} onChange={inputEmail}
+                    icon={<Mail />} label={"メールアドレス"} multiline={false}
+                    required={true} rows={1} type={"email"} value={email}
+                    variant={"standard"} width={"100%"}  onChange={inputEmail}
                 />
                 <TextInput
                     width={"100%"} label={"パスワード"} multiline={false}
@@ -36,11 +36,13 @@ const SignIn: FC = () => {
                     icon={<Lock />} onChange={inputPassword}
                 />
                 <ButtonClick
-                    startIcon={""} color={"primary"}
-                    label={"ログイン"} onClick={() => dispatch(signIn(email, password))}
+                    color={"primary"} label={"ログイン"} startIcon={""}
+                    onClick={() => dispatch(signIn(email, password))}
                 />
                 <br/>
-                <Link href="#" onClick={() => dispatch(push('/signup'))}>アカウント登録はこちら</Link>
+                <Link href="#" onClick={() => dispatch(push('/signup'))}>
+                    アカウント登録はこちら
+                </Link>
             </div>
         </div>
     )

@@ -2,9 +2,9 @@ import React, { FC } from 'react'
 import { makeStyles, Button } from '@material-ui/core'
 
 type Props = {
-    startIcon: string | JSX.Element
     color: "inherit" | "default" | "primary" | "secondary" | undefined
     label: string
+    startIcon: string | JSX.Element
     onClick: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
 }
 
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     }
 })
 
-const ButtonClick: FC<Props> = ({startIcon, color, label, onClick}) => {
+const ButtonClick: FC<Props> = ({color, label, startIcon, onClick}) => {
     const classes = useStyles()
     return (
         <Button

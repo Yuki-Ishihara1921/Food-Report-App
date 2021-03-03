@@ -2,10 +2,10 @@ import React, { FC, useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { push } from 'connected-react-router'
 import { signUp } from '../reducks/users/operations'
-import { Link } from '@material-ui/core'
-import { Person, Mail, Lock } from '@material-ui/icons'
 import { TextInput, ButtonClick } from '../components/UIkit'
 import { ChangeEvent } from '../types'
+import { Link } from '@material-ui/core'
+import { Person, Mail, Lock } from '@material-ui/icons'
 
 const SignUp: FC = () => {
     const dispatch = useDispatch()
@@ -36,31 +36,33 @@ const SignUp: FC = () => {
             <div className="auth__container">
                 <h2 className="text-headline">ユーザー登録</h2>
                 <TextInput
-                    width={"100%"} label={"ユーザー名"} multiline={false}
-                    required={true} rows={1} value={username} type={"text"} variant={"standard"}
-                    icon={<Person />} onChange={inputUsername}
+                    icon={<Person />} label={"ユーザー名"} multiline={false}
+                    required={true} rows={1} type={"text"} value={username}
+                    variant={"standard"} width={"100%"} onChange={inputUsername}
                 />
                 <TextInput
-                    width={"100%"} label={"メールアドレス"} multiline={false}
-                    required={true} rows={1} value={email} type={"email"} variant={"standard"}
-                    icon={<Mail />} onChange={inputEmail}
+                    icon={<Mail />} label={"メールアドレス"} multiline={false}
+                    required={true} rows={1} type={"email"} value={email}
+                    variant={"standard"} width={"100%"} onChange={inputEmail}
                 />
                 <TextInput
-                    width={"100%"} label={"パスワード"} multiline={false}
-                    required={true} rows={1} value={password} type={"password"} variant={"standard"}
-                    icon={<Lock />} onChange={inputPassword}
+                    icon={<Lock />} label={"パスワード"} multiline={false}
+                    required={true} rows={1} type={"password"} value={password}
+                    variant={"standard"} width={"100%"} onChange={inputPassword}
                 />
                 <TextInput
-                    width={"100%"} label={"パスワード(確認用)"} multiline={false}
-                    required={true} rows={1} value={confirmPassword} type={"password"} variant={"standard"}
-                    icon={<Lock />} onChange={inputConfirmPassword}
+                    icon={<Lock />}  label={"パスワード(確認用)"} multiline={false}
+                    required={true} rows={1} type={"password"} value={confirmPassword}
+                    variant={"standard"} width={"100%"} onChange={inputConfirmPassword}
                 />
                 <ButtonClick
-                    startIcon={""} color={"primary"}
-                    label={"アカウントを登録"} onClick={() => dispatch(signUp(username, email, password, confirmPassword))}
+                    color={"primary"} label={"アカウントを登録"} startIcon={""}
+                    onClick={() => dispatch(signUp(username, email, password, confirmPassword))}
                 />
                 <br/>
-                <Link href="#" onClick={() => dispatch(push('/signin'))}>ログインに戻る</Link>
+                <Link href="#" onClick={() => dispatch(push('/signin'))}>
+                    ログインに戻る
+                </Link>
             </div>
         </div>
     )

@@ -13,17 +13,17 @@ export type Category = {
 
 export type ReportData = {
     id: string
+    updated_at: firebase.firestore.Timestamp
     name: string
     url: string
     images: Image[]
     rate: number | null
     date: string
     price: number
+    category: string
     place: string
     station: string
-    category: string
     description: string
-    updated_at: firebase.firestore.Timestamp
 }
 
 export type ReportsState = {
@@ -32,14 +32,14 @@ export type ReportsState = {
 
 export type EditReport = {
     id: string
-    name: string
     images: Image[]
-    rate: number | null
+    name: string
     date: string
     price: number
+    category: string
     place: string
     station: string
-    category: string
+    rate: number | null
     url: string
     description: string
 }

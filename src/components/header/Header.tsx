@@ -1,15 +1,12 @@
 import React, { FC, useState, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../reducks/store'
-import { makeStyles, AppBar, Toolbar, IconButton } from '@material-ui/core'
-import { Menu } from '@material-ui/icons'
 import { AppLogo, SideBarDrawer } from './'
 import { ClickEvent } from '../../types'
+import { makeStyles, AppBar, IconButton, Toolbar } from '@material-ui/core'
+import { Menu } from '@material-ui/icons'
 
 const useStyles = makeStyles({
-    root: {
-        flexGrow: 1
-    },
     appBar: {
         background: 'aliceblue'
     },
@@ -33,28 +30,26 @@ const Header: FC = () => {
     }, [setSideBarOpen])
 
     return (
-        <div className={classes.root}>
-            <AppBar className={classes.appBar}>
-                <Toolbar>
-                    <AppLogo />
-                    {isSignedIn && (
-                        <>
-                            <IconButton
-                                className={classes.iconButton}
-                                onClick={(e) => handleDrawerToggle(e, true)}
-                            >
-                                <Menu />
-                            </IconButton>
-                            <SideBarDrawer
-                                open={sideBarOpen}
-                                setIsOpen={setSideBarOpen}
-                                onClose={handleDrawerToggle}
-                            />
-                        </>
-                    )}
-                </Toolbar>
-            </AppBar>
-        </div>
+        <AppBar className={classes.appBar}>
+            <Toolbar>
+                <AppLogo />
+                {isSignedIn && (
+                    <>
+                        <IconButton
+                            className={classes.iconButton}
+                            onClick={(e) => handleDrawerToggle(e, true)}
+                        >
+                            <Menu />
+                        </IconButton>
+                        <SideBarDrawer
+                            open={sideBarOpen}
+                            onClose={handleDrawerToggle}
+                            setIsOpen={setSideBarOpen}
+                        />
+                    </>
+                )}
+            </Toolbar>
+        </AppBar>
     )
 }
 

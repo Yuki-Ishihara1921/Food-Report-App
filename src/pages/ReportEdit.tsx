@@ -1,16 +1,16 @@
 import React, { FC, useState, useCallback, useEffect } from 'react'
-import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../reducks/store'
 import { saveReport } from '../reducks/reports/operations'
 import { Image, Category, EditReport } from '../reducks/reports/types'
-import { makeStyles, InputLabel } from '@material-ui/core'
-import { Rating } from '@material-ui/lab'
-import { Restaurant, Room, Language, Save, Train } from '@material-ui/icons'
 import { ImageArea } from '../components/reports'
 import { TextInput, SelectBox, ButtonClick } from '../components/UIkit'
 import { ChangeEvent } from '../types'
 import { db } from '../firebase'
+import moment from 'moment'
+import { makeStyles, Box, InputLabel } from '@material-ui/core'
+import { Rating } from '@material-ui/lab'
+import { Restaurant, Room, Language, Save, Train } from '@material-ui/icons'
 
 const useStyles = makeStyles({
     imagesBox: {
@@ -28,22 +28,22 @@ const useStyles = makeStyles({
 
 const ReportEdit: FC = () => {
     const classes = useStyles()
+    const dispatch = useDispatch()
+    const selector = useSelector((state: RootState) => state)
+    const uid = selector.users.uid
     let id = window.location.pathname.split('/report/edit')[1]
     if (id !== "" && id !== undefined) {
         id = id.split('/')[1]
     }
-    const dispatch = useDispatch()
-    const selector = useSelector((state: RootState) => state)
-    const uid = selector.users.uid
 
-    const [name, setName] = useState<string>(""),
-          [images, setImages] = useState<Image[]>([]),
-          [rate, setRate] = useState<number | null>(0),
+    const [images, setImages] = useState<Image[]>([]),
+          [name, setName] = useState<string>(""),
           [date, setDate] = useState<string>(moment().format('YYYY-MM-DD')),
           [price, setPrice] = useState<number>(0),
+          [category, setCategory] = useState<string>(""),
           [place, setPlace] = useState<string>(""),
           [station, setStation] = useState<string>(""),
-          [category, setCategory] = useState<string>(""),
+          [rate, setRate] = useState<number | null>(0),
           [url, setUrl] = useState<string>(""),
           [description, setDescription] = useState<string>(""),
           [categories, setCategories] = useState<Category[]>([])
@@ -79,14 +79,14 @@ const ReportEdit: FC = () => {
     const handleSaveReport = () => {
         const editReport: EditReport = {
             id: id,
-            name: name,
             images: images,
-            rate: rate,
+            name: name,
             date: date,
             price: price,
+            category: category,
             place: place,
             station: station,
-            category: category,
+            rate: rate,
             url: url,
             description: description
         }
@@ -99,28 +99,28 @@ const ReportEdit: FC = () => {
             .then((snapshot) => {
                 const data = snapshot.data()
                 if (data) {
-                    setName(data.name)
-                    setUrl(data.url)
                     setImages(data.images)
-                    setRate(data.rate)
+                    setName(data.name)
                     setDate(data.date)
                     setPrice(data.price)
+                    setCategory(data.category)
                     setPlace(data.place)
                     setStation(data.station)
-                    setCategory(data.category)
+                    setRate(data.rate)
+                    setUrl(data.url)
                     setDescription(data.description)
                 }
             })
         } else {
-            setName("")
-            setUrl("")
             setImages([])
-            setRate(0)
+            setName("")
             setDate(moment().format('YYYY-MM-DD'))
             setPrice(0)
+            setCategory("")
             setPlace("")
             setStation("")
-            setCategory("")
+            setRate(0)
+            setUrl("")
             setDescription("")
         }
     }, [id])
@@ -145,66 +145,64 @@ const ReportEdit: FC = () => {
     return (
         <section className="editPage">
             <h2 className="text-headline">食レポ作成・編集</h2>
-            <div className={classes.imagesBox}>
+            <Box className={classes.imagesBox}>
                 <ImageArea images={images} setImages={setImages} />
-            </div>
-            <div className={classes.inputsBox}>
+            </Box>
+            <Box className={classes.inputsBox}>
                 <TextInput
-                    width={"100%"} label={"店名・料理名等"} multiline={false}
-                    required={true} rows={1} value={name} type={"text"}
-                    variant={"outlined"} icon={<Restaurant />} onChange={inputName}
-                />
-                <div>
-                <TextInput
-                    width={"145px"} label={"日付"} multiline={false}
-                    required={false} rows={1} value={date} type={"date"}
-                    variant={"standard"} icon={""} onChange={inputDate}
+                    icon={<Restaurant />} label={"店名・料理名等"} multiline={false}
+                    required={true} rows={1} type={"text"} value={name}
+                    variant={"outlined"} width={"100%"} onChange={inputName}
                 />
                 <TextInput
-                    width={"85px"} label={"費用(1人分)"} multiline={false}
-                    required={false} rows={1} value={price} type={"number"}
-                    variant={"standard"} icon={"¥"} onChange={inputPrice}
+                    icon={""} label={"日付"} multiline={false}
+                    required={false} rows={1} type={"date"} value={date}
+                    variant={"standard"} width={"145px"} onChange={inputDate}
+                />
+                <TextInput
+                    icon={"¥"} label={"費用(1人分)"} multiline={false}
+                    required={false} rows={1} type={"number"} value={price}
+                    variant={"standard"} width={"85px"} onChange={inputPrice}
                 />
                 <SelectBox
                     label={"カテゴリー"} required={true} options={categories}
                     value={category} select={setCategory}
                 />
                 <TextInput
-                    width={""} label={"主な場所"} multiline={false}
-                    required={false} rows={1} value={place} type={"text"}
-                    variant={"standard"} icon={<Room />} onChange={inputPlace}
+                    icon={<Room />} label={"主な場所"} multiline={false}
+                    required={false} rows={1} type={"text"} value={place}
+                    variant={"standard"} width={""} onChange={inputPlace}
                 />
                 <TextInput
-                    width={""} label={"近くの駅"} multiline={false}
-                    required={false} rows={1} value={station} type={"text"}
-                    variant={"standard"} icon={<Train />} onChange={inputStation}
+                    icon={<Train />} label={"近くの駅"} multiline={false}
+                    required={false} rows={1} type={"text"} value={station}
+                    variant={"standard"} width={""} onChange={inputStation}
                 />
                 <InputLabel>評価</InputLabel>
                 <Rating
                     className={classes.rateBox}
-                    name="rate-edit"
-                    value={rate}
-                    size="medium"
                     max={5}
+                    name="rate-edit"
+                    size="medium"
+                    value={rate}
                     onChange={(e, newValue) => {
                         setRate(newValue)
                     }}
                 />
-                </div>
-            </div>
+            </Box>
             <TextInput
-                width={"100%"} label={"ウェブサイトURL"} multiline={true}
-                required={false} rows={0} value={url} type={"text"}
-                variant={"outlined"} icon={<Language />} onChange={inputUrl}
+                icon={<Language />} label={"ウェブサイトURL"} multiline={true}
+                required={false} rows={0} type={"text"} value={url}
+                variant={"outlined"} width={"100%"} onChange={inputUrl}
             />
             <TextInput
-                width={"100%"} label={"レビュー"} multiline={true}
-                required={false} rows={0} value={description} type={"text"}
-                variant={"outlined"} icon={""} onChange={inputDescription}
+                icon={""}  label={"レビュー"} multiline={true}
+                required={false} rows={0} type={"text"} value={description}
+                variant={"outlined"} width={"100%"} onChange={inputDescription}
             />
             <ButtonClick
-                startIcon={<Save />} color={"primary"}
-                label={"保存"} onClick={handleSaveReport}
+                color={"primary"} label={"保存"} startIcon={<Save />}
+                onClick={handleSaveReport}
             />
         </section>
     )

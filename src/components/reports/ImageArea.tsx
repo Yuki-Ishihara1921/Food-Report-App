@@ -1,9 +1,9 @@
 import React, { FC, useCallback } from 'react'
 import { Image } from '../../reducks/reports/types'
-import { makeStyles, IconButton } from '@material-ui/core'
-import { AddPhotoAlternate } from '@material-ui/icons'
 import ImagePreview from './ImagePreview'
 import { storage } from '../../firebase'
+import { makeStyles, IconButton } from '@material-ui/core'
+import { AddPhotoAlternate } from '@material-ui/icons'
 
 type Props = {
     images: Image[]
@@ -12,9 +12,9 @@ type Props = {
 
 const useStyles = makeStyles({
     icon: {
+        width: 48,
         marginRight: 8,
-        height: 48,
-        width: 48
+        height: 48
     }
 })
 
@@ -42,7 +42,7 @@ const ImageArea: FC<Props> = ({images, setImages}) => {
         })
     }, [setImages])
 
-    const deleteImage = useCallback(async (id: string) => {
+    const deleteImage = useCallback((id: string) => {
         const res = window.confirm("この画像を削除しますか？")
         if (!res) {
             return false
@@ -60,8 +60,9 @@ const ImageArea: FC<Props> = ({images, setImages}) => {
                 <IconButton className={classes.icon}>
                     <label>
                         <AddPhotoAlternate />
-                        <input id="image" className="display-none"
-                               type="file" onChange={(e) => uploadImage(e)}
+                        <input
+                            id="image" className="display-none" type="file"
+                            onChange={(e) => uploadImage(e)}
                         />
                     </label>
                 </IconButton>

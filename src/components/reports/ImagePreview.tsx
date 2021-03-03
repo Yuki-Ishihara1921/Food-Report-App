@@ -3,7 +3,7 @@ import { FC } from 'react'
 type Props = {
     id: string
     path: string
-    deleteImage: (id: string) => Promise<any>
+    deleteImage: (id: string) => void
 }
 
 const ImagePreview: FC<Props> = ({id, path, deleteImage}) => {

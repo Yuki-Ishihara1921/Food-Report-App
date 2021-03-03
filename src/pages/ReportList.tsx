@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { push } from 'connected-react-router'
 import { RootState } from '../reducks/store'
 import { fetchReports } from '../reducks/reports/operations'
-import { Launch } from '@material-ui/icons'
 import { ReportCard } from '../components/reports'
 import { ButtonClick } from '../components/UIkit'
+import { Launch } from '@material-ui/icons'
 
 const ReportList: FC = () => {
     const dispatch = useDispatch()
@@ -26,14 +26,14 @@ const ReportList: FC = () => {
                 {reports.length > 0 ? (
                     reports.map(report => (
                         <ReportCard
-                            key={report.id} id={report.id} images={report.images} 
-                            name={report.name} place={report.place} rate={report.rate}
+                            key={report.id} id={report.id} name={report.name}
+                            images={report.images} place={report.place} rate={report.rate}
                         />
                     ))
                 ) : (
                     <ButtonClick
-                        startIcon={<Launch />} color={"primary"}
-                        label={"新規作成"} onClick={() => dispatch(push('/report/edit'))}
+                        color={"primary"} label={"新規作成"} startIcon={<Launch />}
+                        onClick={() => dispatch(push('/report/edit'))}
                     />
                 )}
             </div>
@@ -42,4 +42,3 @@ const ReportList: FC = () => {
 }
 
 export default ReportList
- 

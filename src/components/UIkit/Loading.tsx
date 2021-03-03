@@ -11,10 +11,10 @@ const Loading: FC = ({children}) => {
     return (
         <>
             {isLoading && (
-                <section className="loading__container">
+                <div className="loading__container">
                     <CircularProgress />
                     <p>{loadingText}</p>
-                </section>
+                </div>
             )}
             {children}
         </>
