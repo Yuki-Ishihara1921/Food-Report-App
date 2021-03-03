@@ -5,9 +5,9 @@
 }
 
 .auth__container {
-  max-width: 400px;
+  max-width: 350px;
   margin: auto;
-  padding: 20px;
+  padding: 20px 40px;
   box-shadow: 0px 0px 3px 0px gray;
   border-radius: 20px;
   text-align: center;
