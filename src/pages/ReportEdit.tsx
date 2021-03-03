@@ -18,7 +18,7 @@ const useStyles = makeStyles({
         boxShadow: '0px 0px 5px 0px gray'
     },
     inputsBox: {
-        margin: '1rem 0'
+        margin: '1rem'
     },
     rateBox: {
         padding: 5,
