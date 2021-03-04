@@ -3,6 +3,7 @@ import { AuthAction, UserState } from './types'
 
 const initialState: UserState = {
     isSignedIn: false,
+    role: "",
     uid: "",
     username: ""
 }

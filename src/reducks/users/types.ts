@@ -3,6 +3,7 @@ import { SIGN_IN, SIGN_OUT } from './actions'
 
 export type UserState = {
     isSignedIn: boolean
+    role: string
     uid: string
     username: string
 }
@@ -11,6 +12,7 @@ export type UserData = {
     uid: string
     username: string
     email: string
+    role: string
     created_at: firebase.firestore.Timestamp
 }
 
