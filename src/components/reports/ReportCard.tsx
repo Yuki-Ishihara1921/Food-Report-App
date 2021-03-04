@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     reportName: {
         display: '-webkit-box',
         width: '100%',
-        padding: 10,
+        margin: '10px 0',
         textAlign: 'center',
         fontSize: 20,
         fontWeight: 'bold',
