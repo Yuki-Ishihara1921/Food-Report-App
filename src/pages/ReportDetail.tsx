@@ -132,7 +132,7 @@ const ReportDetail: FC = () => {
                     />
                     <TextReadOnly
                         icon={"¥"} label={"費用/1人"} multiline={false}
-                        value={price} variant={"outlined"} width={"100px"}
+                        value={price.toLocaleString()} variant={"outlined"} width={"100px"}
                     />
                     <TextReadOnly
                         icon={<Category />} label={"カテゴリー"} multiline={false}
