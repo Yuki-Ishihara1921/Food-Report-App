@@ -150,17 +150,17 @@ const ReportEdit: FC = () => {
             </Box>
             <Box className={classes.inputsBox}>
                 <TextInput
-                    icon={<Restaurant />} label={"店名・料理名等"} multiline={false}
+                    background={"#fff"} icon={<Restaurant />} label={"店名・料理名等"} multiline={false}
                     required={true} rows={1} type={"text"} value={name}
                     variant={"outlined"} width={"100%"} onChange={inputName}
                 />
                 <TextInput
-                    icon={""} label={"日付"} multiline={false}
+                    background={"none"} icon={""} label={"日付"} multiline={false}
                     required={false} rows={1} type={"date"} value={date}
                     variant={"standard"} width={"145px"} onChange={inputDate}
                 />
                 <TextInput
-                    icon={"¥"} label={"費用(1人分)"} multiline={false}
+                    background={"none"} icon={"¥"} label={"費用(1人分)"} multiline={false}
                     required={false} rows={1} type={"number"} value={price}
                     variant={"standard"} width={"85px"} onChange={inputPrice}
                 />
@@ -169,12 +169,12 @@ const ReportEdit: FC = () => {
                     value={category} select={setCategory}
                 />
                 <TextInput
-                    icon={<Room />} label={"主な場所"} multiline={false}
+                    background={"none"} icon={<Room />} label={"主な場所"} multiline={false}
                     required={false} rows={1} type={"text"} value={place}
                     variant={"standard"} width={""} onChange={inputPlace}
                 />
                 <TextInput
-                    icon={<Train />} label={"近くの駅"} multiline={false}
+                    background={"none"} icon={<Train />} label={"近くの駅"} multiline={false}
                     required={false} rows={1} type={"text"} value={station}
                     variant={"standard"} width={""} onChange={inputStation}
                 />
@@ -191,12 +191,12 @@ const ReportEdit: FC = () => {
                 />
             </Box>
             <TextInput
-                icon={<Language />} label={"ウェブサイトURL"} multiline={true}
+                background={"#fff"} icon={<Language />} label={"ウェブサイトURL"} multiline={true}
                 required={false} rows={0} type={"text"} value={url}
                 variant={"outlined"} width={"100%"} onChange={inputUrl}
             />
             <TextInput
-                icon={""}  label={"レビュー"} multiline={true}
+                background={"#fff"} icon={""}  label={"レビュー"} multiline={true}
                 required={false} rows={0} type={"text"} value={description}
                 variant={"outlined"} width={"100%"} onChange={inputDescription}
             />

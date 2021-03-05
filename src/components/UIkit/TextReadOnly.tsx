@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField'
 import { makeStyles, InputAdornment, useMediaQuery, useTheme } from '@material-ui/core'
 
 type Props = {
+    background: string
     icon: string | JSX.Element
     label: string
     multiline: boolean
@@ -18,7 +19,7 @@ const useStyles = makeStyles({
     }
 })
 
-const TextReadOnly: FC<Props> = ({width, label, multiline, value, variant, icon}) => {
+const TextReadOnly: FC<Props> = ({background, icon, label, multiline, value, variant, width}) => {
     const classes = useStyles()
     const theme = useTheme()
     const moreWidthSM = useMediaQuery(theme.breakpoints.up('sm'))
@@ -29,7 +30,7 @@ const TextReadOnly: FC<Props> = ({width, label, multiline, value, variant, icon}
             label={label}
             multiline={multiline}
             size={moreWidthSM ? 'medium' : 'small'}
-            style={{width: width}}
+            style={{width: width, background: background}}
             value={value}
             variant={variant}
             InputProps={{

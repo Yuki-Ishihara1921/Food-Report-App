@@ -3,6 +3,7 @@ import { makeStyles, InputAdornment, TextField } from '@material-ui/core'
 import { ChangeEvent } from '../../types'
 
 type Props = {
+    background: string
     icon: string | JSX.Element
     label: string
     multiline: boolean
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
     }
 })
 
-const TextInput: FC<Props> = ({icon, label, multiline, required, rows, type, value, variant, width, onChange}) => {
+const TextInput: FC<Props> = ({background, icon, label, multiline, required, rows, type, value, variant, width, onChange}) => {
     const classes = useStyles()
     return (
         <TextField
@@ -32,7 +33,7 @@ const TextInput: FC<Props> = ({icon, label, multiline, required, rows, type, val
             multiline={multiline}
             required={required}
             rows={rows}
-            style={{width: width}}
+            style={{width: width, background: background}}
             type={type}
             value={value}
             variant={variant}

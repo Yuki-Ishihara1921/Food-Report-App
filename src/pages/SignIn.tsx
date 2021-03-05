@@ -26,14 +26,14 @@ const SignIn: FC = () => {
             <div className="auth__container">
                 <h2 className="text-headline">ログイン</h2>
                 <TextInput
-                    icon={<Mail />} label={"メールアドレス"} multiline={false}
+                    background={"#fff"} icon={<Mail />} label={"メールアドレス"} multiline={false}
                     required={true} rows={1} type={"email"} value={email}
                     variant={"standard"} width={"100%"}  onChange={inputEmail}
                 />
                 <TextInput
-                    width={"100%"} label={"パスワード"} multiline={false}
-                    required={true} rows={1} value={password} type={"password"} variant={"standard"}
-                    icon={<Lock />} onChange={inputPassword}
+                    background={"#fff"} icon={<Lock />} label={"パスワード"} multiline={false}
+                    required={true} rows={1} type={"password"} value={password}
+                    variant={"standard"} width={"100%"} onChange={inputPassword}
                 />
                 <ButtonClick
                     color={"primary"} label={"ログイン"} startIcon={""}

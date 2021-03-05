@@ -104,12 +104,12 @@ const ReportDetail: FC = () => {
         <section className="reportPage">
             <div className="text-right">
                 <TextReadOnly
-                    icon={<Update />} label={"最終更新日"} multiline={false}
+                    background={"none"} icon={<Update />} label={"最終更新日"} multiline={false}
                     value={updatedAt} variant={"standard"} width={""}
                 />
             </div>
             <TextReadOnly
-                icon={<Restaurant />} label={"店名 / 料理名"} multiline={true}
+                background={"#fff"} icon={<Restaurant />} label={"店名 / 料理名"} multiline={true}
                 value={name} variant={"outlined"} width={"100%"}
             />
             <Box className={classes.itemsBox}>
@@ -128,32 +128,32 @@ const ReportDetail: FC = () => {
                 <div className={classes.content}>
                     <Box>
                         <TextReadOnly
-                            icon={<Event />} label={"日付"} multiline={false}
+                            background={"#fff"} icon={<Event />} label={"日付"} multiline={false}
                             value={date} variant={"outlined"} width={"150px"}
                         />
                         <TextReadOnly
-                            icon={"¥"} label={"費用/1人"} multiline={false}
+                            background={"#fff"} icon={"¥"} label={"費用/1人"} multiline={false}
                             value={price.toLocaleString()} variant={"outlined"} width={"100px"}
                         />
                         <TextReadOnly
-                            icon={<Category />} label={"カテゴリー"} multiline={false}
+                            background={"#fff"} icon={<Category />} label={"カテゴリー"} multiline={false}
                             value={category} variant={"outlined"} width={"175px"}
                         />
                     </Box>
                     <Box>
                         <TextReadOnly
-                            icon={<Room />} label={"主な場所"} multiline={false}
+                            background={"#fff"} icon={<Room />} label={"主な場所"} multiline={false}
                             value={place} variant={"outlined"} width={""}
                         />
                         <TextReadOnly
-                            icon={<Train />} label={"近くの駅"} multiline={false}
+                            background={"#fff"} icon={<Train />} label={"近くの駅"} multiline={false}
                             value={station} variant={"outlined"} width={""}
                         />
                     </Box>
                 </div>
             </Box>
             <TextReadOnly
-                icon={""} label={"レビュー"} multiline={true}
+                background={"#fff"} icon={""} label={"レビュー"} multiline={true}
                 value={description} variant={"outlined"} width={"100%"}
             />
             <ButtonClick
