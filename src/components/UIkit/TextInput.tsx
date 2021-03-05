@@ -17,7 +17,8 @@ type Props = {
 
 const useStyles = makeStyles({
     root: {
-        margin: '10px auto'
+        margin: '10px auto',
+        background: '#fff'
     }
 })
 

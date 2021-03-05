@@ -23,14 +23,17 @@ const useStyles = makeStyles((theme) => ({
         border: '10px solid lightsalmon',
         borderRadius: 20,
         boxShadow: '0px 2px 5px 0px',
-        background: 'floralwhite',
+        background: '#fff',
         cursor: 'pointer',
         [theme.breakpoints.down('sm')]: {
             width: '75%',
             margin: '1rem auto'
         },
         [theme.breakpoints.up('sm')]: {
-            width: 'calc(50% - 50px)',
+            width: 'calc(50% - 50px)'
+        },
+        [theme.breakpoints.up('md')]: {
+            width: 'calc(33% - 50px)',
             margin: 15
         }
     },

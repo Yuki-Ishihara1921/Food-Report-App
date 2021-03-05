@@ -1,7 +1,7 @@
 import React, { FC, useState, useCallback } from 'react'
 import { Image } from '../../reducks/reports/types'
 import { storage } from '../../firebase'
-import { makeStyles, CircularProgress, IconButton } from '@material-ui/core'
+import { makeStyles, Box, CircularProgress, IconButton } from '@material-ui/core'
 import { AddPhotoAlternate } from '@material-ui/icons'
 
 type Props = {
@@ -10,6 +10,9 @@ type Props = {
 }
 
 const useStyles = makeStyles({
+    root: {
+        background: '#fff'
+    },
     iconButton: {
         width: 48,
         height: 48,
@@ -61,7 +64,7 @@ const ImageArea: FC<Props> = ({images, setImages}) => {
     }, [images])
 
     return (
-        <>
+        <Box className={classes.root}>
             <div className="text-right">
                 <span>画像を登録</span>
                 <IconButton className={classes.iconButton}>
@@ -90,7 +93,7 @@ const ImageArea: FC<Props> = ({images, setImages}) => {
                     )}
                 </div>
             )}
-        </>
+        </Box>
     )
 }
 

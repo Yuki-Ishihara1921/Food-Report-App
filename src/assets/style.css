@@ -10,13 +10,14 @@
   padding: 20px 40px;
   box-shadow: 0px 0px 3px 0px gray;
   border-radius: 20px;
+  background: #fff;
   text-align: center;
 }
 
 /* page - Reportlist ReportDetail */
 
 .reportPage {
-  max-width: 760px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 0 10px;
   text-align: center;
@@ -92,6 +93,12 @@
 }
 
 /* common styles */
+
+body {
+  margin: 0;
+  padding: 8px;
+  background: rgba(254, 248, 242, 0.848)
+}
 
 .page-main {
   padding: 60px 0
