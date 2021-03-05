@@ -26,7 +26,11 @@ type Filter = {
 
 const useStyles = makeStyles({
     root: {
-        width: 190
+        width: 190,
+        background: 'aliceblue'
+    },
+    list: {
+        padding: 0
     },
     username: {
         margin: 'auto'
@@ -85,7 +89,7 @@ const SideBarDrawer: FC<Props> = ({open, setIsOpen, onClose}) => {
             open={open}
             onClose={(e) => onClose(e, false)}
         >
-            <List>
+            <List className={classes.list}>
                 <ListItem key="username">
                     <Typography className={classes.username} color={"primary"} variant={"h6"}>
                         {username}
