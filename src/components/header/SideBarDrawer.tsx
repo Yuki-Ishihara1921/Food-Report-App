@@ -26,8 +26,7 @@ type Filter = {
 
 const useStyles = makeStyles({
     root: {
-        width: 190,
-        background: 'aliceblue'
+        width: 190
     },
     list: {
         padding: 0
