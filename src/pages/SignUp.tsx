@@ -36,23 +36,27 @@ const SignUp: FC = () => {
             <div className="auth__container">
                 <h2 className="text-headline">ユーザー登録</h2>
                 <TextInput
-                    background={"#fff"} icon={<Person />} label={"ユーザー名"} multiline={false}
-                    required={true} rows={1} type={"text"} value={username}
+                    background={"#fff"} icon={<Person />} label={"ユーザー名"}
+                    margin={"dense"} multiline={false} required={true}
+                    rows={1} type={"text"} value={username}
                     variant={"standard"} width={"100%"} onChange={inputUsername}
                 />
                 <TextInput
-                    background={"#fff"} icon={<Mail />} label={"メールアドレス"} multiline={false}
-                    required={true} rows={1} type={"email"} value={email}
+                    background={"#fff"} icon={<Mail />} label={"メールアドレス"}
+                    margin={"dense"} multiline={false} required={true}
+                    rows={1} type={"email"} value={email}
                     variant={"standard"} width={"100%"} onChange={inputEmail}
                 />
                 <TextInput
-                    background={"#fff"} icon={<Lock />} label={"パスワード"} multiline={false}
-                    required={true} rows={1} type={"password"} value={password}
+                    background={"#fff"} icon={<Lock />} label={"パスワード"}
+                    margin={"dense"} multiline={false} required={true}
+                    rows={1} type={"password"} value={password}
                     variant={"standard"} width={"100%"} onChange={inputPassword}
                 />
                 <TextInput
-                    background={"#fff"} icon={<Lock />}  label={"パスワード(確認用)"} multiline={false}
-                    required={true} rows={1} type={"password"} value={confirmPassword}
+                    background={"#fff"} icon={<Lock />}  label={"パスワード(確認用)"}
+                    margin={"dense"} multiline={false} required={true}
+                    rows={1} type={"password"} value={confirmPassword}
                     variant={"standard"} width={"100%"} onChange={inputConfirmPassword}
                 />
                 <ButtonClick

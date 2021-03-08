@@ -116,7 +116,7 @@ const ReportEdit: FC = () => {
             setName("")
             setDate(moment().format('YYYY-MM-DD'))
             setPrice(0)
-            setCategory("")
+            setCategory("その他")
             setPlace("")
             setStation("")
             setRate(0)
@@ -150,55 +150,60 @@ const ReportEdit: FC = () => {
             </Box>
             <Box className={classes.inputsBox}>
                 <TextInput
-                    background={"#fff"} icon={<Restaurant />} label={"店名・料理名等"} multiline={false}
-                    required={true} rows={1} type={"text"} value={name}
-                    variant={"outlined"} width={"100%"} onChange={inputName}
+                    background={"#fff"} icon={<Restaurant />} label={"店名・料理名等"}
+                    margin={"normal"} multiline={false} required={true}
+                    rows={1} type={"text"} value={name} variant={"outlined"}
+                    width={"100%"} onChange={inputName}
                 />
                 <TextInput
-                    background={"none"} icon={""} label={"日付"} multiline={false}
-                    required={false} rows={1} type={"date"} value={date}
-                    variant={"standard"} width={"145px"} onChange={inputDate}
+                    background={"#fff"} icon={""} label={"日付"}
+                    margin={"dense"} multiline={false} required={false}
+                    rows={1} type={"date"} value={date} variant={"outlined"}
+                    width={"175px"} onChange={inputDate}
                 />
                 <TextInput
-                    background={"none"} icon={"¥"} label={"費用(1人分)"} multiline={false}
-                    required={false} rows={1} type={"number"} value={price}
-                    variant={"standard"} width={"85px"} onChange={inputPrice}
+                    background={"#fff"} icon={"¥"} label={"費用(1人分)"}
+                    margin={"dense"} multiline={false} required={false}
+                    rows={1} type={"number"} value={price} variant={"outlined"}
+                    width={"110px"} onChange={inputPrice}
                 />
                 <SelectBox
-                    label={"カテゴリー"} required={true} options={categories}
-                    value={category} select={setCategory}
+                    label={"カテゴリー"} margin={"dense"} required={true}
+                    options={categories} value={category} width={"160px"}
+                    select={setCategory}
                 />
                 <TextInput
-                    background={"none"} icon={<Room />} label={"主な場所"} multiline={false}
-                    required={false} rows={1} type={"text"} value={place}
-                    variant={"standard"} width={""} onChange={inputPlace}
+                    background={"#fff"} icon={<Room />} label={"主な場所"}
+                    margin={"dense"} multiline={false} required={false}
+                    rows={1} type={"text"} value={place} variant={"outlined"}
+                    width={""} onChange={inputPlace}
                 />
                 <TextInput
-                    background={"none"} icon={<Train />} label={"近くの駅"} multiline={false}
-                    required={false} rows={1} type={"text"} value={station}
-                    variant={"standard"} width={""} onChange={inputStation}
+                    background={"#fff"} icon={<Train />} label={"近くの駅"}
+                    margin={"dense"} multiline={false} required={false}
+                    rows={1} type={"text"} value={station} variant={"outlined"}
+                    width={""} onChange={inputStation}
                 />
                 <InputLabel>評価</InputLabel>
                 <Rating
-                    className={classes.rateBox}
-                    max={5}
-                    name="rate-edit"
-                    size="medium"
-                    value={rate}
+                    className={classes.rateBox} max={5}
+                    name="rate-edit" size="medium" value={rate}
                     onChange={(e, newValue) => {
                         setRate(newValue)
                     }}
                 />
             </Box>
             <TextInput
-                background={"#fff"} icon={<Language />} label={"ウェブサイトURL"} multiline={true}
-                required={false} rows={0} type={"text"} value={url}
-                variant={"outlined"} width={"100%"} onChange={inputUrl}
+                background={"#fff"} icon={<Language />} label={"ウェブサイトURL"}
+                margin={"dense"} multiline={true} required={false}
+                rows={0} type={"text"} value={url} variant={"outlined"}
+                width={"100%"} onChange={inputUrl}
             />
             <TextInput
-                background={"#fff"} icon={""}  label={"レビュー"} multiline={true}
-                required={false} rows={0} type={"text"} value={description}
-                variant={"outlined"} width={"100%"} onChange={inputDescription}
+                background={"#fff"} icon={""}  label={"レビュー"}
+                margin={"normal"} multiline={true} required={false}
+                rows={0} type={"text"} value={description} variant={"outlined"}
+                width={"100%"} onChange={inputDescription}
             />
             <ButtonClick
                 color={"primary"} label={"保存"} startIcon={<Save />}
