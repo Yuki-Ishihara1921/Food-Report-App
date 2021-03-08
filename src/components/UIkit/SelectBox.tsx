@@ -4,29 +4,35 @@ import { makeStyles, FormControl, InputLabel, MenuItem, Select } from '@material
 
 type Props = {
     label: string
+    margin: "dense" | "none" | undefined
     options: Category[]
     required: boolean
     value: string
+    width: string
     select: React.Dispatch<React.SetStateAction<string>>
 }
 
 const useStyles = makeStyles({
     root: {
-        width: 175,
-        margin: '7px auto',
-        background: 'none'
+        margin: '10px auto',
+        background: '#fff'
     }
 })
 
-const SelectBox: FC<Props> = ({label, options, required, value, select}) => {
+const SelectBox: FC<Props> = ({label, margin, options, required, value, width, select}) => {
     const classes = useStyles()
     return (
-        <FormControl className={classes.root}>
+        <FormControl
+            className={classes.root}
+            style={{width: width}}
+            variant="outlined"
+        >
             <InputLabel>{label}</InputLabel>
             <Select
+                label={label}
+                margin={margin}
                 required={required}
                 value={value}
-                variant="standard"
                 onChange={(e: React.ChangeEvent<{ value: unknown }>) => select(String(e.target.value))}
             >
                 {options.map((category) => (
