@@ -104,13 +104,15 @@ const ReportDetail: FC = () => {
         <section className="reportPage">
             <div className="text-right">
                 <TextReadOnly
-                    background={"none"} icon={<Update />} label={"最終更新日"} multiline={false}
-                    value={updatedAt} variant={"standard"} width={""}
+                    background={"none"} icon={<Update />} label={"最終更新日"}
+                    margin={"dense"} multiline={false} value={updatedAt}
+                    variant={"standard"} width={""}
                 />
             </div>
             <TextReadOnly
-                background={"none"} icon={<Restaurant />} label={"店名 / 料理名"} multiline={true}
-                value={name} variant={"outlined"} width={"100%"}
+                background={"none"} icon={<Restaurant />} label={"店名 / 料理名"}
+                margin={"normal"} multiline={true} value={name}
+                variant={"outlined"} width={"100%"}
             />
             <Box className={classes.itemsBox}>
                 <div className={classes.content}>
@@ -128,33 +130,39 @@ const ReportDetail: FC = () => {
                 <div className={classes.content}>
                     <Box>
                         <TextReadOnly
-                            background={"none"} icon={<Event />} label={"日付"} multiline={false}
-                            value={date} variant={"standard"} width={"150px"}
+                            background={"none"} icon={<Event />} label={"日付"}
+                            margin={"dense"} multiline={false} value={date}
+                            variant={"standard"} width={"150px"}
                         />
                         <TextReadOnly
-                            background={"none"} icon={"¥"} label={"費用/1人"} multiline={false}
-                            value={price.toLocaleString()} variant={"standard"} width={"110px"}
+                            background={"none"} icon={"¥"} label={"費用/1人"}
+                            margin={"dense"} multiline={false} value={price.toLocaleString()}
+                            variant={"standard"} width={"110px"}
                         />
                         <TextReadOnly
-                            background={"none"} icon={<Category />} label={"カテゴリー"} multiline={false}
-                            value={category} variant={"standard"} width={"175px"}
+                            background={"none"} icon={<Category />} label={"カテゴリー"}
+                            margin={"dense"} multiline={false} value={category}
+                            variant={"standard"} width={"175px"}
                         />
                     </Box>
                     <Box>
                         <TextReadOnly
-                            background={"none"} icon={<Room />} label={"主な場所"} multiline={false}
-                            value={place} variant={"standard"} width={""}
+                            background={"none"} icon={<Room />} label={"主な場所"}
+                            margin={"dense"} multiline={false} value={place}
+                            variant={"standard"} width={""}
                         />
                         <TextReadOnly
-                            background={"none"} icon={<Train />} label={"近くの駅"} multiline={false}
-                            value={station} variant={"standard"} width={""}
+                            background={"none"} icon={<Train />} label={"近くの駅"}
+                            margin={"dense"} multiline={false} value={station}
+                            variant={"standard"} width={""}
                         />
                     </Box>
                 </div>
             </Box>
             <TextReadOnly
-                background={"none"} icon={""} label={"レビュー"} multiline={true}
-                value={description} variant={"outlined"} width={"100%"}
+                background={"none"} icon={""} label={"レビュー"}
+                margin={"normal"} multiline={true} value={description}
+                variant={"outlined"} width={"100%"}
             />
             <ButtonClick
                 color={"primary"} label={"編集"} startIcon={<Edit />}

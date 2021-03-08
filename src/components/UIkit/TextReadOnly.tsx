@@ -6,6 +6,7 @@ type Props = {
     background: string
     icon: string | JSX.Element
     label: string
+    margin: "normal" | "none" | "dense" | undefined
     multiline: boolean
     value: string | number
     variant: "standard" | "filled" | "outlined" | undefined
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
     }
 })
 
-const TextReadOnly: FC<Props> = ({background, icon, label, multiline, value, variant, width}) => {
+const TextReadOnly: FC<Props> = ({background, icon, label, margin, multiline, value, variant, width}) => {
     const classes = useStyles()
     const theme = useTheme()
     const moreWidthSM = useMediaQuery(theme.breakpoints.up('sm'))
@@ -28,6 +29,7 @@ const TextReadOnly: FC<Props> = ({background, icon, label, multiline, value, var
         <TextField
             className={classes.root}
             label={label}
+            margin={margin}
             multiline={multiline}
             size={moreWidthSM ? 'medium' : 'small'}
             style={{width: width, background: background}}
