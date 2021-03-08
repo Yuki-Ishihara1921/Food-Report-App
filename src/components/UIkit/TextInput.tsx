@@ -6,6 +6,7 @@ type Props = {
     background: string
     icon: string | JSX.Element
     label: string
+    margin: "normal" | "none" | "dense" | undefined
     multiline: boolean
     required: boolean
     rows: number
@@ -18,18 +19,17 @@ type Props = {
 
 const useStyles = makeStyles({
     root: {
-        margin: '10px auto',
-        background: '#fff'
+        margin: '10px auto'
     }
 })
 
-const TextInput: FC<Props> = ({background, icon, label, multiline, required, rows, type, value, variant, width, onChange}) => {
+const TextInput: FC<Props> = ({background, icon, label, margin, multiline, required, rows, type, value, variant, width, onChange}) => {
     const classes = useStyles()
     return (
         <TextField
             className={classes.root}
             label={label}
-            margin="dense"
+            margin={margin}
             multiline={multiline}
             required={required}
             rows={rows}
