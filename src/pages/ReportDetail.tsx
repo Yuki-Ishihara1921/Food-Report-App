@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
             margin: 'auto 1rem'
         },
         [theme.breakpoints.up('sm')]: {
-            margin: 'auto 4rem'
+            margin: 'auto 3rem'
         },
         [theme.breakpoints.up('md')]: {
             margin: 'auto 1rem'
@@ -109,7 +109,7 @@ const ReportDetail: FC = () => {
                 />
             </div>
             <TextReadOnly
-                background={"#fff"} icon={<Restaurant />} label={"店名 / 料理名"} multiline={true}
+                background={"none"} icon={<Restaurant />} label={"店名 / 料理名"} multiline={true}
                 value={name} variant={"outlined"} width={"100%"}
             />
             <Box className={classes.itemsBox}>
@@ -128,32 +128,32 @@ const ReportDetail: FC = () => {
                 <div className={classes.content}>
                     <Box>
                         <TextReadOnly
-                            background={"#fff"} icon={<Event />} label={"日付"} multiline={false}
-                            value={date} variant={"outlined"} width={"150px"}
+                            background={"none"} icon={<Event />} label={"日付"} multiline={false}
+                            value={date} variant={"standard"} width={"150px"}
                         />
                         <TextReadOnly
-                            background={"#fff"} icon={"¥"} label={"費用/1人"} multiline={false}
-                            value={price.toLocaleString()} variant={"outlined"} width={"100px"}
+                            background={"none"} icon={"¥"} label={"費用/1人"} multiline={false}
+                            value={price.toLocaleString()} variant={"standard"} width={"110px"}
                         />
                         <TextReadOnly
-                            background={"#fff"} icon={<Category />} label={"カテゴリー"} multiline={false}
-                            value={category} variant={"outlined"} width={"175px"}
+                            background={"none"} icon={<Category />} label={"カテゴリー"} multiline={false}
+                            value={category} variant={"standard"} width={"175px"}
                         />
                     </Box>
                     <Box>
                         <TextReadOnly
-                            background={"#fff"} icon={<Room />} label={"主な場所"} multiline={false}
-                            value={place} variant={"outlined"} width={""}
+                            background={"none"} icon={<Room />} label={"主な場所"} multiline={false}
+                            value={place} variant={"standard"} width={""}
                         />
                         <TextReadOnly
-                            background={"#fff"} icon={<Train />} label={"近くの駅"} multiline={false}
-                            value={station} variant={"outlined"} width={""}
+                            background={"none"} icon={<Train />} label={"近くの駅"} multiline={false}
+                            value={station} variant={"standard"} width={""}
                         />
                     </Box>
                 </div>
             </Box>
             <TextReadOnly
-                background={"#fff"} icon={""} label={"レビュー"} multiline={true}
+                background={"none"} icon={""} label={"レビュー"} multiline={true}
                 value={description} variant={"outlined"} width={"100%"}
             />
             <ButtonClick
