@@ -94,6 +94,7 @@ export const deleteReport = (uid: string, reportId: string, images: Image[]) => 
                 const nextReports = prevReports.filter((report: ReportData) => report.id !== reportId)
                 dispatch(fetchReportsAction(nextReports))
                 dispatch(hideLoadingAction())
+                dispatch(push('/'))
             })
             .catch((error) => {
                 dispatch(hideLoadingAction())
