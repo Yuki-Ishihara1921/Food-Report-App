@@ -7,7 +7,7 @@ import { ImageSwiper } from '../components/reports'
 import { TextReadOnly, ButtonClick } from '../components/UIkit'
 import { db } from '../firebase'
 import firebase from 'firebase/app'
-import { makeStyles, Box, Link } from '@material-ui/core'
+import { makeStyles, Box, Link, useMediaQuery, useTheme } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
 import { Category, Delete, Edit, Event, Restaurant, Room, Train, Update } from '@material-ui/icons'
 
@@ -23,10 +23,10 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         [theme.breakpoints.down('sm')]: {
-            margin: 'auto 1rem'
+            margin: '1rem 2rem'
         },
         [theme.breakpoints.up('sm')]: {
-            margin: 'auto 3rem'
+            margin: '1rem 3rem'
         },
         [theme.breakpoints.up('md')]: {
             margin: 'auto 1rem'
@@ -44,10 +44,7 @@ const useStyles = makeStyles((theme) => ({
     },
     rating: {
         padding: '5px 10px',
-        boxShadow: '0px 2px 0px -1px gray',
-        [theme.breakpoints.down('sm')]: {
-            marginBottom: 20
-        }
+        boxShadow: '0px 2px 0px -1px gray'
     }
 }))
 
@@ -57,6 +54,8 @@ const ReportDetail: FC = () => {
     const selector = useSelector((state: RootState) => state)
     const uid = selector.users.uid
     const id = window.location.href.split('/reports/')[1]
+    const theme = useTheme()
+    const moreWidthSM = useMediaQuery(theme.breakpoints.up('sm'))
 
     const [updatedAt, setUpdatedAt] = useState<string>(""),
           [name, setName] = useState<string>(""),
@@ -124,7 +123,7 @@ const ReportDetail: FC = () => {
                     </div>
                     <Rating
                         className={classes.rating} name="rate-detail"
-                        readOnly size={"large"} value={rate}
+                        readOnly size={moreWidthSM ? 'large' : 'medium'} value={rate}
                     />
                 </div>
                 <div className={classes.content}>
@@ -132,17 +131,17 @@ const ReportDetail: FC = () => {
                         <TextReadOnly
                             background={"none"} icon={<Event />} label={"日付"}
                             margin={"dense"} multiline={false} value={date}
-                            variant={"standard"} width={"150px"}
+                            variant={"standard"} width={"130px"}
                         />
                         <TextReadOnly
                             background={"none"} icon={"¥"} label={"費用/1人"}
                             margin={"dense"} multiline={false} value={price.toLocaleString()}
-                            variant={"standard"} width={"110px"}
+                            variant={"standard"} width={"90px"}
                         />
                         <TextReadOnly
                             background={"none"} icon={<Category />} label={"カテゴリー"}
                             margin={"dense"} multiline={false} value={category}
-                            variant={"standard"} width={"175px"}
+                            variant={"standard"} width={"160px"}
                         />
                     </Box>
                     <Box>

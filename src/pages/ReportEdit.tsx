@@ -165,7 +165,7 @@ const ReportEdit: FC = () => {
                     background={"#fff"} icon={"¥"} label={"費用(1人分)"}
                     margin={"dense"} multiline={false} required={false}
                     rows={1} type={"number"} value={price} variant={"outlined"}
-                    width={"110px"} onChange={inputPrice}
+                    width={"115px"} onChange={inputPrice}
                 />
                 <SelectBox
                     label={"カテゴリー"} margin={"dense"} required={true}
