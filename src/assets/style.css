@@ -97,7 +97,11 @@
 body {
   margin: 0;
   padding: 8px;
-  background: rgba(254, 248, 242, 0.848)
+  background: repeating-linear-gradient(
+    -45deg,
+    rgb(254, 236, 216) 0, rgb(254, 236, 216) 5px,
+    #fff 5px, #fff 10px
+  );
 }
 
 .page-main {
