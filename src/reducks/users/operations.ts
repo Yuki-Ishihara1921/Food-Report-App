@@ -48,13 +48,13 @@ export const signUp = (username: string, email: string, password: string, confir
                     })
                 } else {
                     dispatch(hideLoadingAction())
-                    alert("アカウント登録に失敗しました。通信環境をご確認の上もう一度お試し下さい。")
+                    alert("アカウントを登録できませんでした。もう一度お試し下さい。")
                     return false
                 }
             })
             .catch((error) => {
                 dispatch(hideLoadingAction())
-                alert("アカウント登録に失敗しました。通信環境をご確認の上もう一度お試し下さい。")
+                alert("アカウントを登録できませんでした。通信環境をご確認の上もう一度お試し下さい。")
                 throw new Error(error)
             })
         }
@@ -88,7 +88,7 @@ export const signIn = (email: string, password: string) => {
                         dispatch(push('/'))
                     } else {
                         dispatch(hideLoadingAction())
-                        throw new Error("ユーザーデータが存在しません。")
+                        throw new Error("ユーザー情報が存在しません。")
                     }
                 })
             } else {
@@ -98,7 +98,7 @@ export const signIn = (email: string, password: string) => {
         })
         .catch(() => {
             dispatch(hideLoadingAction())
-            alert("ログインに失敗しました。入力内容をご確認の上、再度お試し下さい。")
+            alert("ログインできませんでした。入力内容をご確認の上、再度お試し下さい。")
         })
     }
 }
@@ -118,7 +118,7 @@ export const signOut = () => {
             })
             .catch((error) => {
                 dispatch(hideLoadingAction())
-                alert("ログアウトに失敗しました。")
+                alert("ログアウトできませんでした。")
                 throw new Error(error)
             })
         }
@@ -141,7 +141,7 @@ export const listenAuthState = () => {
                             username: userData.username
                         }))
                     } else {
-                        throw new Error("ユーザーデータが存在しません。")
+                        throw new Error("ユーザー情報が存在しません。")
                     }
                 })
             } else {
